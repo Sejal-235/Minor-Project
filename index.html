@@ -1,0 +1,497 @@
+ <!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 महाविद्यालयीन मानसशास्त्र केंद्र</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            min-height: 100vh; 
+            overflow-x: hidden;
+        }
+        @keyframes gradientShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%}}
+        
+        /* LOGIN FORM STYLES */
+        .login-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10000;
+        }
+        .login-box {
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+            border-radius: 30px; padding: 50px; max-width: 450px;
+            width: 90%; box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .login-box h2 { color: #333; margin-bottom: 30px; font-size: 2rem; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 8px; color: #555; font-weight: 500; }
+        .form-group input { width: 100%; padding: 18px; border: 2px solid #eee; 
+            border-radius: 15px; font-size: 1.1rem; transition: all 0.3s; }
+        .form-group input:focus { outline: none; border-color: #4ecdc4; box-shadow: 0 0 0 3px rgba(78,205,196,0.1); }
+        .login-btn { background: linear-gradient(45deg, #ff6b6b, #feca57); 
+            color: white; border: none; padding: 20px 50px; border-radius: 50px;
+            font-size: 1.2rem; font-weight: 600; cursor: pointer; width: 100%;
+            transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,107,107,0.4); }
+        .login-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,107,0.6); }
+        .login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        /* Hide main content until login */
+        .main-content { display: none; }
+        .logout-btn { position: fixed; top: 20px; right: 20px; 
+            background: rgba(255,255,255,0.2); color: white; border: none;
+            padding: 12px 20px; border-radius: 25px; cursor: pointer; z-index: 1000; }
+
+        /* Particles */
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .particle { position: absolute; background: rgba(255,255,255,0.1); border-radius: 50%; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0px)rotate(0deg)} 50%{transform:translateY(-20px)rotate(180deg)} }
+        
+        /* MAIN CONTENT STYLES (दुसऱ्या code मधून) */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        .main-header { text-align: center; color: white; margin-bottom: 50px; animation: slideInDown 1s ease; }
+        @keyframes slideInDown { from{transform:translateY(-50px);opacity:0} to{transform:translateY(0);opacity:1} }
+        .main-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 15px; text-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .main-header p { font-size: 1.3rem; opacity: 0.9; font-weight: 300; }
+        
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .test-card { 
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); 
+            border-radius: 25px; padding: 35px 25px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden;
+        }
+        .test-card:hover { transform: translateY(-15px) scale(1.02); background: rgba(255,255,255,0.25); box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        .test-card.selected { background: rgba(78,205,196,0.4); border-color: #4ecdc4; transform: translateY(-10px) scale(1.05); }
+        .test-icon { font-size: 4rem; margin-bottom: 20px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
+        .test-title { font-size: 1.5rem; font-weight: 600; color: white; margin-bottom: 10px; }
+        .test-desc { color: rgba(255,255,255,0.9); line-height: 1.6; }
+        
+        .start-btn { background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; padding: 20px 50px; border-radius: 50px; 
+            font-size: 1.3rem; font-weight: 600; cursor: pointer; margin: 40px auto; display: block; transition: all 0.3s ease; 
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4); }
+        .start-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,107,0.6); }
+        .start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .quiz-container, .results { display: none; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-radius: 30px; 
+            padding: 50px; margin: 20px 0; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+        .progress-container { background: rgba(0,0,0,0.1); height: 12px; border-radius: 10px; margin-bottom: 40px; overflow: hidden; }
+        .progress { background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #feca57); height: 100%; width: 0%; border-radius: 10px; transition: width 0.6s ease; }
+        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
+        .question-counter { background: linear-gradient(45deg, #4ecdc4, #44a08d); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600; }
+        .question { font-size: 1.6rem; font-weight: 500; color: #333; margin-bottom: 40px; line-height: 1.6; text-align: center; }
+        .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 50px; }
+        .option { background: linear-gradient(145deg, #f0f0f0, #cacaca); border: 3px solid transparent; border-radius: 20px; padding: 25px; 
+            cursor: pointer; transition: all 0.3s ease; font-size: 1.1rem; font-weight: 500; }
+        .option:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .option.selected { background: linear-gradient(145deg, #4ecdc4, #26a69a); color: white; border-color: #26a69a; transform: scale(1.03); }
+        
+        .nav-buttons { display: flex; justify-content: space-between; gap: 20px; }
+        .btn { flex: 1; padding: 18px 30px; border: none; border-radius: 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .btn-primary { background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; box-shadow: 0 10px 30px rgba(255,107,107,0.4); }
+        .btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .result-hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 40px; border-radius: 30px; margin-bottom: 40px; text-align: center; }
+        .result-title { font-size: 3rem; font-weight: 700; margin-bottom: 20px; }
+        .result-score { font-size: 5rem; font-weight: 700; background: linear-gradient(45deg, #fff, rgba(255,255,255,0.8)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 20px 0; }
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 40px 0; }
+        .tip-card { background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 4px solid #4ecdc4; }
+        .restart-btn { background: linear-gradient(45deg, #4ecdc4, #26a69a); color: white; padding: 25px 60px; font-size: 1.3rem; font-weight: 600; border-radius: 50px; 
+            box-shadow: 0 15px 40px rgba(78,205,196,0.4); border: none; cursor: pointer; display: block; margin: 40px auto; }
+        
+        @media (max-width: 768px) { .test-grid, .options { grid-template-columns: 1fr; } .question { font-size: 1.3rem; } }
+    </style>
+</head>
+<body>
+    <!-- LOGIN SCREEN -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h2><i class="fas fa-user-lock"></i> प्रवेश करा</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>नाव <span style="color:red">*</span></label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label>ईमेल <span style="color:red">*</span></label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label>महाविद्यालय <span style="color:red">*</span></label>
+                    <input type="text" id="college" placeholder="उदा: Fergusson College, पुणे" required>
+                </div>
+                <div class="form-group">
+                    <label>इयत्ता <span style="color:red">*</span></label>
+                    <input type="text" id="std" placeholder="उदा: TYBSc, SYBA" required>
+                </div>
+                <button type="submit" class="login-btn">प्रवेश करा <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <!-- LOGOUT BUTTON -->
+    <button class="logout-btn" id="logoutBtn" style="display:none;" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> बाहेर पडा
+    </button>
+
+    <!-- MAIN CONTENT (COMPLETE INTERFACE जोडला!) -->
+    <div class="particles" id="particles"></div>
+    <div class="container main-content">
+        <!-- Student Info -->
+        <div class="main-header">
+            <h1><i class="fas fa-brain"></i> मानसशास्त्र केंद्र</h1>
+            <p>महाविद्यालयीन विद्यार्थ्यांसाठी १० प्रगत चाचण्या | १००+ प्रश्न | वैज्ञानिक विश्लेषण</p>
+            <div id="studentInfo" style="margin-top:20px;font-size:1.1rem;color:rgba(255,255,255,0.9);"></div>
+        </div>
+
+        <!-- TEST SELECTION -->
+        <div class="test-grid" id="testSelection"></div>
+        <button class="start-btn" id="startBtn" disabled><span id="startBtnText">चाचणी सुरू करा</span></button>
+
+        <!-- QUIZ -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="progress-container"><div class="progress" id="progress"></div></div>
+            <div class="question-header">
+                <div class="question-counter" id="questionNum">प्रश्न १/१०</div>
+                <div id="testTitleHeader"></div>
+            </div>
+            <div class="question" id="question"></div>
+            <div class="options" id="options"></div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" disabled><i class="fas fa-arrow-left"></i> मागे</button>
+                <button class="btn btn-primary" id="nextBtn"><i class="fas fa-arrow-right"></i> पुढे</button>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results" id="results">
+            <div class="result-hero">
+                <h2 class="result-title" id="resultTitle">परिणाम</h2>
+                <div class="result-score" id="resultScore">85%</div>
+                <p class="result-interpretation" id="resultDesc"></p>
+            </div>
+            <div class="tips-grid" id="tipsGrid"></div>
+            <button class="restart-btn" onclick="backToSelection()">
+                <i class="fas fa-redo"></i> नवीन चाचणी घ्या
+            </button>
+        </div>
+    </div>
+
+<script>
+    // GLOBAL VARIABLES
+    let currentStudent = null;
+    let currentTest = null;
+    let currentQuestion = 0;
+    let answers = [];
+
+    // 10 COMPLETE TESTS (पहिले 3 full, बाकीचे template)
+    const tests = [
+        {
+            id: 0, title: 'तणाव व्यवस्थापन', icon: '😰', desc: 'तुमची तणाव सहनशक्ती मोजा', color: '#ff6b6b',
+            questions: [
+                {q: "परीक्षेच्या आधी रात्रभर जागतो?", o: ["कधीच नाही", "कधीकधी", "बहुधा", "नेहमी"], a: 0},
+                {q: "कामाचे दबाव सहन करणे कठीण जाते?", o: ["सहजतेने", "कधीकधी", "बहुधा", "खूप कठीण"], a: 0},
+                {q: "झोपेची समस्या येते?", o: ["नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "मित्रांशी बोलण्याची इच्छा कमी होते?", o: ["नाही", "कमी", "बहुधा", "पूर्ण नाही"], a: 0},
+                {q: "हात-पाय थरथरतात?", o: ["कधीच नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "भूक कमी होते?", o: ["नाही", "कमी", "बहुधा", "खूप"], a: 0},
+                {q: "एकाग्रता कमी होते?", o: ["नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "डोकेदुखी होते?", o: ["कधीच नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "आराम करायला आवडते?", o: ["नेहमी", "बहुधा", "कधीकधी", "कधीच नाही"], a: 3},
+                {q: "तणाव कमी करण्याचे मार्ग शोधता?", o: ["नेहमी", "बहुधा", "कधीकधी", "कधीच नाही"], a: 3}
+            ],
+            results: {
+                0: {title: "उत्तम तणाव व्यवस्थापन! 🎉", score: "90-100%", desc: "तुम्ही तणाव खूप चांगला हाताळता.", tips: ["व्यायाम चालू ठेवा", "ध्यान करा", "सकारात्मक राहा"]},
+                1: {title: "चांगले तणाव व्यवस्थापन 👍", score: "70-89%", desc: "सुधारणा शक्य आहे.", tips: ["श्वास व्यायाम", "वेळ नियोजन", "मित्रांशी बोलणे"]},
+                2: {title: "सुधारणा आवश्यक ⚠️", score: "50-69%", desc: "तणाव व्यवस्थापन सुधारा.", tips: ["प्रोफेशनल मदत", "ध्यान चालू करा", "जीवनशैली बदला"]},
+                3: {title: "आपत्कालीन मदत घ्या 🚨", score: "0-49%", desc: "लवकर काउन्सेलर भेटा.", tips: ["डॉक्टर भेट", "कुटुंब मदत", "तात्काळ उपाय"]}
+            }
+        },
+        {
+            id: 1, title: 'चिंता पातळी', icon: '😟', desc: 'चिंतेची तीव्रता तपासा', color: '#4ecdc4',
+            questions: [
+                {q: "भविष्याची चिंता होते?", o: ["कधीच नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "अनावश्यक चिंता येते?", o: ["नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "हृदयाचे ठोके वाढतात?", o: ["कधीच नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "घाम येतो?", o: ["नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "डोके फिरते?", o: ["कधीच नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "श्वास अडकतो?", o: ["नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "पोटदुखी होते?", o: ["कधीच नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "झोप येत नाही?", o: ["नाही", "कधीकधी", "बहुधा", "सतत"], a: 0},
+                {q: "निर्णय घेणे कठीण?", o: ["सहज", "कधीकधी", "बहुधा", "खूप कठीण"], a: 0},
+                {q: "चिंता कमी करण्याचा प्रयत्न करता?", o: ["नेहमी", "बहुधा", "कधीकधी", "कधीच नाही"], a: 3}
+            ],
+            results: {
+                0: {title: "चांगली चिंता व्यवस्थापन! 🌟", score: "90-100%", desc: "तुमची चिंता सामान्य आहे.", tips: ["सकारात्मक राहा", "व्यायाम करा", "ध्यान"]},
+                1: {title: "मध्यम चिंता ⚡", score: "70-89%", desc: "काही सुधारणा करा.", tips: ["श्वास व्यायाम", "ध्यान", "आरोग्य"]},
+                2: {title: "उच्च चिंता ⚠️", score: "50-69%", desc: "लक्ष द्या.", tips: ["प्रोफेशनल मदत", "नियमित ध्यान", "जीवनशैली"]},
+                3: {title: "गंभीर चिंता 🚨", score: "0-49%", desc: "लवकर डॉक्टर भेटा.", tips: ["काउन्सेलर", "कुटुंब", "तात्काळ उपाय"]}
+            }
+        },
+        {
+            id: 2, title: 'आत्मविश्वास', icon: '💪', desc: 'स्वतःवरील विश्वास मोजा', color: '#feca57',
+            questions: [
+                {q: "स्वतःवर विश्वास आहे?", o: ["पूर्ण विश्वास", "चांगला", "मध्यम", "कमी"], a: 0},
+                {q: "नवीन गोष्टी शिकता येतात?", o: ["सहज", "चांगले", "मध्यम", "कठीण"], a: 0},
+                {q: "निर्णय घेता येतात?", o: ["सहज", "चांगले", "मध्यम", "कठीण"], a: 0},
+                {q: "अपयश सहन करता येतं?", o: ["सहज", "चांगले", "मध्यम", "कठीण"], a: 0},
+                {q: "लक्ष्य गाठता येतात?", o: ["सहज", "चांगले", "मध्यम", "कठीण"], a: 0},
+                {q: "स्वतःची प्रशंसा करता?", o: ["नेहमी", "चांगले", "कधीकधी", "कधीच नाही"], a: 0},
+                {q: "इतरांशी स्पर्धा करता?", o: ["सहज", "चांगले", "मध्यम", "नाही"], a: 0},
+                {q: "नवीन लोकांना भेटता?", o: ["सहज", "चांगले", "मध्यम", "भीती वाटते"], a: 0},
+                {q: "स्वतःला कमी समजता?", o: ["कधीच नाही", "कमी", "कधीकधी", "नेहमी"], a: 0},
+                {q: "यश मिळवू शकता?", o: ["पूर्ण खात्री", "चांगली", "मध्यम", "कमी"], a: 0}
+            ],
+            results: {
+                0: {title: "उत्तम आत्मविश्वास! 🔥", score: "90-100%", desc: "तुमचं आत्मविश्वास खूपच चांगलं आहे.", tips: ["इतरांना प्रेरणा द्या", "लक्ष्य वाढवा", "लीडरशिप घ्या"]},
+                1: {title: "चांगला आत्मविश्वास 👍", score: "70-89%", desc: "अजून सुधारणा करा.", tips: ["सकारात्मक बोल", "प्रॅक्टिस", "छोटी यश साजरी"]},
+                2: {title: "मध्यम आत्मविश्वास ⚠️", score: "50-69%", desc: "सुधारणा आवश्यक.", tips: ["स्वतःची प्रशंसा", "छोटे पाऊल", "प्रोफेशनल मदत"]},
+                3: {title: "आत्मविश्वास वाढवा 🚀", score: "0-49%", desc: "लवकर सुधारणा करा.", tips: ["काउन्सेलर", "सकारात्मक विचार", "प्रॅक्टिस"]}
+            }
+        },
+        // बाकीचे 7 tests (template - नंतर complete कर)
+        {id: 3, title: 'भावनिक बुद्धिमत्ता', icon: '❤️', desc: 'भावनांचे नियंत्रण तपासा', color: '#4ecdc4'},
+        {id: 4, title: 'अभ्यास सवयी', icon: '📚', desc: 'अभ्यासाच्या सवयी तपासा', color: '#ff9ff3'},
+        {id: 5, title: 'सामाजिक कौशल्ये', icon: '👥', desc: 'मित्रमैत्री व संबंध तपासा', color: '#54a0ff'},
+        {id: 6, title: 'सर्जनशीलता', icon: '🎨', desc: 'कल्पनाशक्ती मोजा', color: '#5f27cd'},
+        {id: 7, title: 'वेळ व्यवस्थापन', icon: '⏰', desc: 'वेळेचे नियोजन तपासा', color: '#00d2d3'},
+        {id: 8, title: 'नेतृत्व गुणधर्म', icon: '👑', desc: 'लीडरशिप क्षमता मोजा', color: '#ff9f43'},
+        {id: 9, title: 'करिअर तयारी', icon: '💼', desc: 'प्रोफेशनल तयारी तपासा', color: '#00b894'}
+    ];
+
+    // 1. LOGIN HANDLING (तुझा original)
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const studentData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            college: document.getElementById('college').value,
+            std: document.getElementById('std').value
+        };
+        
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(studentData)
+            });
+            
+            const data = await response.json();
+            if(data.success) {
+                currentStudent = data.student;
+                document.getElementById('loginContainer').style.display = 'none';
+                document.querySelector('.main-content').style.display = 'block';
+                document.getElementById('logoutBtn').style.display = 'block';
+                document.getElementById('studentInfo').innerHTML = 
+                    `स्वागत आहे, ${currentStudent.name}! (${currentStudent.college}, ${currentStudent.std})`;
+                
+                createParticles();
+                renderTests(); // ← Tests दाखव
+            } else {
+                alert('एरर: ' + data.message);
+            }
+        } catch(error) {
+            alert('कनेक्शन एरर! लॉकल सर्व्हर चालू आहे का तपासा.');
+        }
+    });
+
+    // 2. SAVE TEST RESULT TO DATABASE (तुझा original)
+    async function saveTestResult(testName, score, percentage, level, resultTitle, suggestions) {
+        if(!currentStudent) return;
+        
+        await fetch('/api/save-result', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                student_id: currentStudent.id,
+                test_name: testName,
+                score: score,
+                percentage: percentage,
+                level: level,
+                result_title: resultTitle,
+                suggestions: JSON.stringify(suggestions)
+            })
+        });
+    }
+
+    // 3. PARTICLES ANIMATION
+    function createParticles() {
+        const particles = document.getElementById('particles');
+        for(let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.width = particle.style.height = (Math.random() * 10 + 5) + 'px';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            particles.appendChild(particle);
+        }
+    }
+
+    // 4. RENDER TESTS
+    function renderTests() {
+        document.getElementById('testSelection').innerHTML = tests.map(test => `
+            <div class="test-card" onclick="selectTest(${test.id})">
+                <div class="test-icon">${test.icon}</div>
+                <div class="test-title">${test.title}</div>
+                <div class="test-desc">${test.desc}</div>
+                <div style="display:flex;justify-content:space-between;font-size:0.9rem;color:rgba(255,255,255,0.8);margin-top:15px;">
+                    <span>१० प्रश्न</span><span>५ मिनिटे</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // 5. SELECT TEST
+    function selectTest(id) {
+        currentTest = tests[id];
+        document.querySelectorAll('.test-card').forEach((card, index) => {
+            card.classList.toggle('selected', index === id);
+        });
+        document.getElementById('startBtn').disabled = false;
+        document.getElementById('startBtnText').textContent = `चाचणी सुरू करा: ${currentTest.title}`;
+        document.getElementById('testTitleHeader').textContent = currentTest.title;
+    }
+
+    // 6. START QUIZ
+    document.getElementById('startBtn').onclick = startQuiz;
+    function startQuiz() {
+        document.getElementById('testSelection').style.display = 'none';
+        document.getElementById('startBtn').style.display = 'none';
+        document.getElementById('quizContainer').style.display = 'block';
+        
+        answers = new Array(10).fill(-1);
+        currentQuestion = 0;
+        renderQuestion();
+    }
+
+    // 7. RENDER QUESTION
+    function renderQuestion() {
+        if (!currentTest || !currentTest.questions) {
+            alert('या चाचणीसाठी प्रश्न उपलब्ध नाहीत. पहिल्या ३ चाचण्या वापरा.');
+            backToSelection();
+            return;
+        }
+
+        const qData = currentTest.questions[currentQuestion];
+        document.getElementById('questionNum').textContent = `प्रश्न ${currentQuestion + 1}/१०`;
+        document.getElementById('question').textContent = qData.q;
+        
+        const options = document.getElementById('options');
+        options.innerHTML = qData.o.map((option, index) => `
+            <div class="option ${answers[currentQuestion] === index ? 'selected' : ''}" 
+                 onclick="selectOption(${index})">${option}</div>
+        `).join('');
+
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        document.getElementById('nextBtn').innerHTML = currentQuestion === 9 ? 
+            '<i class="fas fa-check"></i> समाप्त करा' : '<i class="fas fa-arrow-right"></i> पुढे';
+        
+        updateProgress();
+    }
+
+    // 8. SELECT OPTION
+    function selectOption(index) {
+        answers[currentQuestion] = index;
+        renderQuestion();
+    }
+
+    // 9. NAVIGATION BUTTONS
+    document.getElementById('prevBtn').onclick = () => {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            renderQuestion();
+        }
+    };
+
+    document.getElementById('nextBtn').onclick = () => {
+        if (currentQuestion < 9) {
+            currentQuestion++;
+        } else {
+            showResults();
+        }
+        renderQuestion();
+    };
+
+    // 10. UPDATE PROGRESS
+    function updateProgress() {
+        const answered = answers.filter(a => a !== -1).length;
+        document.getElementById('progress').style.width = (answered / 10 * 100) + '%';
+    }
+
+    // 11. SHOW RESULTS (तुझा saveTestResult + नवा UI)
+    function showResults() {
+        const score = answers.reduce((total, ans, i) => total + (ans === currentTest.questions[i].a ? 1 : 0), 0);
+        const percentage = Math.round(score / 10 * 100);
+        const level = percentage >= 90 ? 0 : percentage >= 70 ? 1 : percentage >= 50 ? 2 : 3;
+        const result = currentTest.results[level];
+        
+        // SAVE TO DATABASE (तुझा original code)
+        saveTestResult(currentTest.title, score, percentage, level, result.title, result.tips);
+        
+        // SHOW RESULTS
+        document.getElementById('quizContainer').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('resultTitle').textContent = result.title;
+        document.getElementById('resultScore').textContent = percentage + '%';
+        document.getElementById('resultDesc').textContent = result.desc;
+        document.getElementById('tipsGrid').innerHTML = result.tips.map(tip => `
+            <div class="tip-card">
+                <i class="fas fa-lightbulb" style="font-size:2rem;color:#4ecdc4;margin-bottom:15px;"></i>
+                <div>${tip}</div>
+            </div>
+        `).join('');
+    }
+
+    // 12. BACK TO SELECTION
+    function backToSelection() {
+        document.getElementById('results').style.display = 'none';
+        document.getElementById('quizContainer').style.display = 'none';
+        document.getElementById('testSelection').style.display = 'grid';
+        document.getElementById('startBtn').style.display = 'block';
+        
+        currentTest = null;
+        currentQuestion = 0;
+        answers = [];
+        
+        document.querySelectorAll('.test-card').forEach(card => card.classList.remove('selected'));
+        document.getElementById('startBtn').disabled = true;
+        document.getElementById('startBtnText').textContent = 'चाचणी सुरू करा';
+    }
+
+    // 13. LOGOUT (तुझा original)
+    function logout() {
+        currentStudent = null;
+        document.getElementById('loginContainer').style.display = 'flex';
+        document.querySelector('.main-content').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'none';
+        document.getElementById('loginForm').reset();
+        
+        // Reset test UI
+        backToSelection();
+        document.getElementById('particles').innerHTML = '';
+    }
+
+    // 14. KEYBOARD SHORTCUTS
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && document.getElementById('quizContainer').style.display !== 'none') {
+            document.getElementById('nextBtn').click();
+        }
+    } 
+    );
+</script>
+</body>
+</html>
