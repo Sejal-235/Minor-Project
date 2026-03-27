@@ -1,115 +1,470 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="mr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🧠 महाविद्यालयीन मानसशास्त्र केंद्र</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Poppins', sans-serif; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
             background-size: 400% 400%;
             animation: gradientShift 12s ease infinite;
-            min-height: 100vh; 
+            min-height: 100vh;
             overflow-x: hidden;
         }
-        @keyframes gradientShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%}}
-        
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+        }
+
         /* LOGIN FORM STYLES */
         .login-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-            display: flex; align-items: center; justify-content: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 10000;
         }
+
         .login-box {
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-            border-radius: 30px; padding: 50px; max-width: 450px;
-            width: 90%; box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
-        .login-box h2 { color: #333; margin-bottom: 30px; font-size: 2rem; }
-        .form-group { margin-bottom: 25px; text-align: left; }
-        .form-group label { display: block; margin-bottom: 8px; color: #555; font-weight: 500; }
-        .form-group input { width: 100%; padding: 18px; border: 2px solid #eee; 
-            border-radius: 15px; font-size: 1.1rem; transition: all 0.3s; }
-        .form-group input:focus { outline: none; border-color: #4ecdc4; box-shadow: 0 0 0 3px rgba(78,205,196,0.1); }
-        .login-btn { background: linear-gradient(45deg, #ff6b6b, #feca57); 
-            color: white; border: none; padding: 20px 50px; border-radius: 50px;
-            font-size: 1.2rem; font-weight: 600; cursor: pointer; width: 100%;
-            transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,107,107,0.4); }
-        .login-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,107,0.6); }
-        .login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        
+
+        .login-box h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         /* Hide main content until login */
-        .main-content { display: none; }
-        .logout-btn { position: fixed; top: 20px; right: 20px; 
-            background: rgba(255,255,255,0.2); color: white; border: none;
-            padding: 12px 20px; border-radius: 25px; cursor: pointer; z-index: 1000; }
+        .main-content {
+            display: none;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            z-index: 1000;
+        }
 
         /* Particles */
-        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .particle { position: absolute; background: rgba(255,255,255,0.1); border-radius: 50%; animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%,100%{transform:translateY(0px)rotate(0deg)} 50%{transform:translateY(-20px)rotate(180deg)} }
-        
-        /* MAIN CONTENT STYLES (दुसऱ्या code मधून) */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
-        .main-header { text-align: center; color: white; margin-bottom: 50px; animation: slideInDown 1s ease; }
-        @keyframes slideInDown { from{transform:translateY(-50px);opacity:0} to{transform:translateY(0);opacity:1} }
-        .main-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 15px; text-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .main-header p { font-size: 1.3rem; opacity: 0.9; font-weight: 300; }
-        
-        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
-        .test-card { 
-            background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); 
-            border-radius: 25px; padding: 35px 25px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden;
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
-        .test-card:hover { transform: translateY(-15px) scale(1.02); background: rgba(255,255,255,0.25); box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
-        .test-card.selected { background: rgba(78,205,196,0.4); border-color: #4ecdc4; transform: translateY(-10px) scale(1.05); }
-        .test-icon { font-size: 4rem; margin-bottom: 20px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
-        .test-title { font-size: 1.5rem; font-weight: 600; color: white; margin-bottom: 10px; }
-        .test-desc { color: rgba(255,255,255,0.9); line-height: 1.6; }
-        
-        .start-btn { background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; padding: 20px 50px; border-radius: 50px; 
-            font-size: 1.3rem; font-weight: 600; cursor: pointer; margin: 40px auto; display: block; transition: all 0.3s ease; 
-            box-shadow: 0 10px 30px rgba(255,107,107,0.4); }
-        .start-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,107,0.6); }
-        .start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        
-        .quiz-container, .results { display: none; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-radius: 30px; 
-            padding: 50px; margin: 20px 0; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
-        .progress-container { background: rgba(0,0,0,0.1); height: 12px; border-radius: 10px; margin-bottom: 40px; overflow: hidden; }
-        .progress { background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #feca57); height: 100%; width: 0%; border-radius: 10px; transition: width 0.6s ease; }
-        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }
-        .question-counter { background: linear-gradient(45deg, #4ecdc4, #44a08d); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600; }
-        .question { font-size: 1.6rem; font-weight: 500; color: #333; margin-bottom: 40px; line-height: 1.6; text-align: center; }
-        .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 50px; }
-        .option { background: linear-gradient(145deg, #f0f0f0, #cacaca); border: 3px solid transparent; border-radius: 20px; padding: 25px; 
-            cursor: pointer; transition: all 0.3s ease; font-size: 1.1rem; font-weight: 500; }
-        .option:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        .option.selected { background: linear-gradient(145deg, #4ecdc4, #26a69a); color: white; border-color: #26a69a; transform: scale(1.03); }
-        
-        .nav-buttons { display: flex; justify-content: space-between; gap: 20px; }
-        .btn { flex: 1; padding: 18px 30px; border: none; border-radius: 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
-        .btn-primary { background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; box-shadow: 0 10px 30px rgba(255,107,107,0.4); }
-        .btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        
-        .result-hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 40px; border-radius: 30px; margin-bottom: 40px; text-align: center; }
-        .result-title { font-size: 3rem; font-weight: 700; margin-bottom: 20px; }
-        .result-score { font-size: 5rem; font-weight: 700; background: linear-gradient(45deg, #fff, rgba(255,255,255,0.8)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 20px 0; }
-        .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 40px 0; }
-        .tip-card { background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 4px solid #4ecdc4; }
-        .restart-btn { background: linear-gradient(45deg, #4ecdc4, #26a69a); color: white; padding: 25px 60px; font-size: 1.3rem; font-weight: 600; border-radius: 50px; 
-            box-shadow: 0 15px 40px rgba(78,205,196,0.4); border: none; cursor: pointer; display: block; margin: 40px auto; }
-        
-        @media (max-width: 768px) { .test-grid, .options { grid-template-columns: 1fr; } .question { font-size: 1.3rem; } }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px)rotate(0deg)
+            }
+
+            50% {
+                transform: translateY(-20px)rotate(180deg)
+            }
+        }
+
+        /* MAIN CONTENT STYLES (दुसऱ्या code मधून) */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: slideInDown 1s ease;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1
+            }
+        }
+
+        .main-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .test-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 35px 25px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .test-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .test-card.selected {
+            background: rgba(78, 205, 196, 0.4);
+            border-color: #4ecdc4;
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .test-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        .test-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .test-desc {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 40px auto;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .start-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .start-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-container,
+        .results {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 20px 0;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-container {
+            background: rgba(0, 0, 0, 0.1);
+            height: 12px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .progress {
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #feca57);
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.6s ease;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .question-counter {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .question {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .option {
+            background: linear-gradient(145deg, #f0f0f0, #cacaca);
+            border: 3px solid transparent;
+            border-radius: 20px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .option.selected {
+            background: linear-gradient(145deg, #4ecdc4, #26a69a);
+            color: white;
+            border-color: #26a69a;
+            transform: scale(1.03);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .result-score {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, rgba(255, 255, 255, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .tip-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #4ecdc4;
+        }
+
+        .restart-btn {
+            background: linear-gradient(45deg, #4ecdc4, #26a69a);
+            color: white;
+            padding: 25px 60px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.4);
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 40px auto;
+        }
+
+        @media (max-width: 768px) {
+
+            .test-grid,
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .question {
+                font-size: 1.3rem;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- LOGIN SCREEN -->
     <div class="login-container" id="loginContainer">
@@ -151,7 +506,7 @@
         <!-- Student Info -->
         <div class="main-header">
             <h1><i class="fas fa-brain"></i> Psychological Test and Analysis For Students... </h1>
-            <p>महाविद्यालयीन विद्यार्थ्यांसाठी १० प्रगत चाचण्या | १००+ प्रश्न | वैज्ञानिक विश्लेषण</p>
+            <p>महाविद्यालयीन विद्यार्थ्यांसाठी  १२ प्रगत चाचण्या | १००+ प्रश्न | वैज्ञानिक विश्लेषण</p>
             <div id="studentInfo" style="margin-top:20px;font-size:1.1rem;color:rgba(255,255,255,0.9);"></div>
         </div>
 
@@ -161,7 +516,9 @@
 
         <!-- QUIZ -->
         <div class="quiz-container" id="quizContainer">
-            <div class="progress-container"><div class="progress" id="progress"></div></div>
+            <div class="progress-container">
+                <div class="progress" id="progress"></div>
+            </div>
             <div class="question-header">
                 <div class="question-counter" id="questionNum">प्रश्न १/१०</div>
                 <div id="testTitleHeader"></div>
@@ -188,364 +545,405 @@
         </div>
     </div>
 
-<script>
-    // GLOBAL VARIABLES
-    let currentStudent = null;
-    let currentTest = null;
-    let currentQuestion = 0;
-    let answers = [];
-
-  
-    const tests = [
-        {
-            id: 0, title: 'तणाव व्यवस्थापन', icon: '😰', desc: 'तुमची तणाव सहनशक्ती मोजा', color: '#ff6b6b',
-            questions: [
-                {q: "परीक्षेच्या आधी रात्रभर जागतो?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a: 3},
-                {q: "कामाचे दबाव सहन करणे कठीण जाते?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a: 3},
-                {q: "झोपेची समस्या येते?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a: 3},
-                {q: "मित्रांशी बोलण्याची इच्छा कमी होते?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a: 3},
-                {q: "हात-पाय थरथरतात?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a: 3},
-                {q: "भूक कमी होते?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a:3},
-                {q: "एकाग्रता कमी होते?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a: 3},
-                {q: "डोकेदुखी होते?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a:3},
-                {q: "आराम करायला आवडते?", o: ["हो","नाही","कधीकधी","कधीच नाही"], a: 3},
-                {q: "तणाव कमी करण्याचे मार्ग शोधता?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a:0}
-            ],
-            results: {
-                0: {title: "उत्तम तणाव व्यवस्थापन! 🎉", score: "90-100%", desc: "तुम्ही तणाव खूप चांगला हाताळता.", tips: ["नियमित व्यायाम चालू ठेवा जसे चालणे किंवा योगासने, ज्यामुळे एंडोर्फिन्स सोडले जातात आणि मन शांत राहते ", "दररोज १५-२० मिनिटे ध्यान किंवा माइंडफुलनेस करा, ज्याने चिंता कमी होते आणि एकाग्रता वाढते", "सकारात्मक विचार आणि आभार व्यक्त करण्याची सवय लावा, ज्यामुळे तणाव कमी होऊन आनंद वाढतो"]},
-                1: {title: "चांगले तणाव व्यवस्थापन 👍", score: "70-89%", desc: "सुधारणा शक्य आहे.", tips: ["श्वास व्यायाम करा जसे दीर्घ श्वास आत-बाहेर, ज्यामुळे हृदयाचे ठोके नियंत्रित होतात आणि तणाव झटपट कमी होतो", "वेळेचे नियोजन करा आणि कामांची यादी बनवा, ज्यामुळे दबाव कमी होऊन उत्पादकता वाढते ", "मित्र किंवा कुटुंबाशी बोलणे वाढवा, ज्यामुळे भावना शेअर होऊन मन हलके होते"]},
-                2: {title: "सुधारणा आवश्यक ⚠️", score: "50-69%", desc: "तणाव व्यवस्थापन सुधारा.", tips: ["प्रोफेशनल मदत घ्या जसे काउन्सेलर किंवा थेरपी, जी दीर्घकालीन तणावाचे मूळ शोधते आणि उपाय देते ", "ध्यान चालू करा आणि योग्य प्रमाणात झोप घ्या (६-८ तास), ज्यामुळे शारीरिक आणि मानसिक थकवा दूर होतो", "जीवनशैली बदला जसे निरोगी आहार, छंद जोपासणे आणि हलका व्यायाम, ज्याने एकूण कल्याण वाढते."]},
-                3: {title: "आपत्कालीन मदत घ्या 🚨", score: "0-49%", desc: "लवकर काउन्सेलर भेटा.", tips: ["तात्काळ डॉक्टर किंवा मानसोपचारतज्ज्ञ भेटा, जे वैद्यकीय तपासणी आणि उपचार सुचवतील ", "कुटुंब किंवा जवळच्या मित्रांची मदत घ्या आणि भावना उघडपणे सांगा, ज्यामुळे एकटेपणा कमी होतो ", "तात्काळ उपाय म्हणून प्राणायाम, संगीत ऐकणे किंवा हसण्याची थेरपी करा, जोपर्यंत व्यावसायिक मदत मिळते"]}
-            }
-        },
-        {
-            id: 1, title: 'भावनिक बुद्धीमत्ता', icon: '😟', desc: 'चिंतेची तीव्रता तपासा', color: '#4ecdc4',
-            questions: [
-                {q: "मी माझ्या भावना लगेच ओळखतो/ओळखते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "राग येईल तेव्हा मी शांत राहून विचार करतो/करते.", o:  ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "इतरांच्या चेहऱ्यावरून त्यांच्या भावना समजतात.", o:  ["हो", "नाही", "कधीकधी", "कधीच नाही"], a:0},
-                {q: "तणावातही मी शांत राहू शकतो/शकते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "मी इतरांना प्रोत्साहित करू शकतो/शकते.", o:  ["हो", "नाही", "कधीकधी", "कधीच नाही"], a:0},
-                {q: "माझ्या निर्णयांवर भावनांचा परिणाम होत नाही.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a:1},
-                {q: "मी संघर्ष सोडवण्यात पटाईत आहे.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "माझ्या चुका मान्य करतो/करते आणि शिकतो/शिकते.", o:  ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "इतरांच्या दृष्टिकोनातून परिस्थिती पाहू शकतो/शकते.", o:  ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "मी स्वतःला प्रेरित करू शकतो/शकते, निराश होत नाही.", o:  ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0}
-            ],
+    <script>
+        // GLOBAL VARIABLES
+        let currentStudent = null;
+        let currentTest = null;
+        let currentQuestion = 0;
+        let answers = [];
 
 
-           results: {
-0: {title: "उत्तम भावनिक बुद्धीमत्ता ", score: "90-100%", desc: "तुम्ही भावना खूप चांगल्या हाताळता.", tips: ["तुमची ताकद कायम ठेवण्यासाठी दररोज १० मिनिटे जर्नलिंग करा ज्यात यशस्वी भावनिक क्षणांचा विचार करा.", "मेंटॉर म्हणून इतरांना EI शिकवा, ज्यामुळे तुमचे कौशल्य आणखी खोल आणि मजबूत होईल", "Leadership roles घ्या जिथे तुम्ही टीममधील भावना समजून घेऊन निर्णय घ्याल."]} ,
-1: {title: " चांगली भावनिक बुद्धीमत्ता ", score: " 70-89%  ", desc: "सामान्य पातळीवर आहात, आणखी सुधारणा शक्य.", tips: ["दैनिक भावना डायरी ठेवा - सकाळी आणि रात्री ५ मिनिटे लिहा 'आज मी काय भावना अनुभवल्या आणि त्यांचा अर्थ काय?", "सहानुभूती सराव: दिवसातून ३ वेळा एखाद्या व्यक्तीच्या शब्दांपेक्षा body language वर लक्ष द्या आणि त्यांच्या भावना अनुमान लावा.", "मिरर टेक्निक: आरशासमोर स्वतःशी बोलून विविध भावनांमध्ये प्रतिक्रिया दाखवा आणि स्वतःला शांत करा"]},
-2: {title: " मध्यम भावनिक बुद्धीमत्ता  ",  score: " 50-69%  ", desc: "भावना नियंत्रण वाढवण्याची गरज आहे.", tips: ["ट्रिगर मॅपिंग: प्रत्येक आठवडा तुम्हाला संताप/चिंता होणारे ५ ट्रिगर्स नोंदवा आणि त्यांचे मूळ कारण शोधा.", "STOP टेक्निक शिका: Stop(थांबा)-Take deep breath(श्वास घ्या)-Observe(निरीक्षण करा)-Proceed(पुढे जा) ही ४ पायरी प्रत्येक conflict मध्ये वापरा.", "Feedback circle बनवा: ३ विश्वासू मित्रांपासून दरमहा 'माझ्या भावनिक हाताळणीबद्दल' feedback घ्या."]},
-3:{title: "कमी भावनिक बुद्धीमत्ता ", score: "  0-49% ", desc: "लवकर मूलभूत कौशल्ये विकसित करा.", tips: ["आठवड्यातून २ वेळा काउन्सेलर/थेरपिस्ट भेटा जो CBT (Cognitive Behavioral Therapy) करते, जी भावनिक patterns बदलते.", "'Emotional Intelligence 2.0' पुस्तक + workbook घ्या आणि दररोज १ व्यायाम (१५ मिनिटे) करा ३० दिवस.", "EI समूह कार्यशाळा जॉईन करा किंवा WhatsApp study group बनवा जिथे आठवड्यातून १ दा role-plays करता येतील."]},        
-}
-        },
-          
-        {
-            id: 2, title: 'आत्मविश्वास', icon: '💪', desc: 'स्वतःवरील विश्वास मोजा', color: '#feca57',
-            questions: [
-                {q: "स्वतःवर विश्वास असतो ?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "मी कोलेजमधील नवीन आव्हानांना सामोरे जाऊ शकतो/शकते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "गट प्रकल्पात मी नेतृत्व घेतो/घेते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "अपयश सहन करता येतं?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "लक्ष्य गाठता येतात?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "स्वतःची प्रशंसा करता?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "मित्र/मैत्रिणीन मध्ये मी स्वतःला कमी लेखत नाही. ?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "नवीन लोकांना भेटता?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "स्वतःला कमी समजता?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "प्रेझेंटेशन देताना घाबरत नाही?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0}
-            ],
-  
+        const tests = [
+            {
+                id: 0, title: 'तणाव व्यवस्थापन', icon: '😰', desc: 'तुमची तणाव सहनशक्ती मोजा', color: '#ff6b6b',
+                questions: [
+                    { q: "परीक्षेच्या आधी रात्रभर जागतो?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कामाचे दबाव सहन करणे कठीण जाते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "झोपेची समस्या येते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "मित्रांशी बोलण्याची इच्छा कमी होते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "हात-पाय थरथरतात?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "भूक कमी होते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "एकाग्रता कमी होते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "डोकेदुखी होते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "आराम करायला आवडते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "तणाव कमी करण्याचे मार्ग शोधता?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 }
+                ],
+                results: {
+                    0: { title: "उत्तम तणाव व्यवस्थापन! 🎉", score: "90-100%", desc: "तुम्ही तणाव खूप चांगला हाताळता.", tips: ["नियमित व्यायाम चालू ठेवा जसे चालणे किंवा योगासने, ज्यामुळे एंडोर्फिन्स सोडले जातात आणि मन शांत राहते ", "दररोज १५-२० मिनिटे ध्यान किंवा माइंडफुलनेस करा, ज्याने चिंता कमी होते आणि एकाग्रता वाढते", "सकारात्मक विचार आणि आभार व्यक्त करण्याची सवय लावा, ज्यामुळे तणाव कमी होऊन आनंद वाढतो"] },
+                    1: { title: "चांगले तणाव व्यवस्थापन 👍", score: "70-89%", desc: "सुधारणा शक्य आहे.", tips: ["श्वास व्यायाम करा जसे दीर्घ श्वास आत-बाहेर, ज्यामुळे हृदयाचे ठोके नियंत्रित होतात आणि तणाव झटपट कमी होतो", "वेळेचे नियोजन करा आणि कामांची यादी बनवा, ज्यामुळे दबाव कमी होऊन उत्पादकता वाढते ", "मित्र किंवा कुटुंबाशी बोलणे वाढवा, ज्यामुळे भावना शेअर होऊन मन हलके होते"] },
+                    2: { title: "सुधारणा आवश्यक ⚠️", score: "50-69%", desc: "तणाव व्यवस्थापन सुधारा.", tips: ["प्रोफेशनल मदत घ्या जसे काउन्सेलर किंवा थेरपी, जी दीर्घकालीन तणावाचे मूळ शोधते आणि उपाय देते ", "ध्यान चालू करा आणि योग्य प्रमाणात झोप घ्या (६-८ तास), ज्यामुळे शारीरिक आणि मानसिक थकवा दूर होतो", "जीवनशैली बदला जसे निरोगी आहार, छंद जोपासणे आणि हलका व्यायाम, ज्याने एकूण कल्याण वाढते."] },
+                    3: { title: "आपत्कालीन मदत घ्या 🚨", score: "0-49%", desc: "लवकर काउन्सेलर भेटा.", tips: ["तात्काळ डॉक्टर किंवा मानसोपचारतज्ज्ञ भेटा, जे वैद्यकीय तपासणी आणि उपचार सुचवतील ", "कुटुंब किंवा जवळच्या मित्रांची मदत घ्या आणि भावना उघडपणे सांगा, ज्यामुळे एकटेपणा कमी होतो ", "तात्काळ उपाय म्हणून प्राणायाम, संगीत ऐकणे किंवा हसण्याची थेरपी करा, जोपर्यंत व्यावसायिक मदत मिळते"] }
+                }
+            },
+            {
+                id: 1, title: 'भावनिक बुद्धीमत्ता', icon: '😟', desc: 'चिंतेची तीव्रता तपासा', color: '#4ecdc4',
+                questions: [
+                    { q: "मी माझ्या भावना लगेच ओळखतो/ओळखते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "राग येईल तेव्हा मी शांत राहून विचार करतो/करते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "इतरांच्या चेहऱ्यावरून त्यांच्या भावना समजतात.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "तणावातही मी शांत राहू शकतो/शकते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी इतरांना प्रोत्साहित करू शकतो/शकते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "माझ्या निर्णयांवर भावनांचा परिणाम होत नाही.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 1 },
+                    { q: "मी संघर्ष सोडवण्यात पटाईत आहे.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "माझ्या चुका मान्य करतो/करते आणि शिकतो/शिकते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "इतरांच्या दृष्टिकोनातून परिस्थिती पाहू शकतो/शकते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी स्वतःला प्रेरित करू शकतो/शकते, निराश होत नाही.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 }
+                ],
 
-results: {
-    0: {title: "उत्तम आत्मविश्वास! 🔥", score: "90-100%", desc: "तुमचं आत्मविश्वास खूपच चांगलं आहे.", tips: ["इतरांना प्रेरणा द्या - तुमच्या अनुभव शेअर करा आणि मेंटॉर म्हणून काम करा, ज्यामुळे तुमचं आत्मविश्वास आणखी मजबूत होईल.","लक्ष्ये वाढवा - आता मोठी, दीर्घकालीन ध्येये घ्या आणि roadmap बनवा, तुमची क्षमता दाखवण्यासाठी.","लीडरशिप रोल्स घ्या - टीम लीड किंवा प्रोजेक्ट हेड म्हणून जबाबदारी घ्या, जिथे तुम्ही निर्णय घेऊ शकाल."]},
-    1: {title: "चांगला आत्मविश्वास 👍", score: "70-89%", desc: "अजून सुधारणा करा.", tips: ["सकारात्मक बोलणे सराव - आरशासमोर 'मी हे करू शकतो/शकते' १० वेळा म्हणा आणि दिवसभर positive affirmations वापरा.","प्रॅक्टिस करा - public speaking group जॉईन करा किंवा दररोज १ नवीन गोष्ट बोलण्याचा सराव करा.","छोटी यश साजरी करा - प्रत्येक छोटं यश नोट करा आणि स्वतःला बक्षीस द्या (चॉकलेट/फिल्म)."]},
-    2: {title: "मध्यम आत्मविश्वास ⚠️", score: "50-69%", desc: "सुधारणा आवश्यक.", tips: ["स्वतःची प्रशंसा करा - दररोज ३ चांगल्या गोष्टी लिहा ज्यात तुम्ही चांगले आहात (talents/गुणवत्ता).","छोटे पाऊल घ्या - 'no' म्हणण्यापासून सुरुवात करा आणि हळूहळू मोठ्या निर्णय घ्या.","प्रोफेशनल मदत घ्या - confidence coach किंवा Toastmasters club जॉईन करा ३ महिन्यांसाठी."]},
-    3: {title: "आत्मविश्वास वाढवा 🚀", score: "0-49%", desc: "लवकर सुधारणा करा.", tips: ["काउन्सेलरला भेटा - CBT थेरपी घ्या जी self-doubt चे मूळ कारण शोधते आणि patterns बदलते.","सकारात्मक विचार सराव - 'Power Pose' (Superman pose) २ मिनिटे सकाळी करा + gratitude journal.","प्रॅक्टिस प्रोग्राम - ३० दिवस 'confidence challenge' : रोज १ नवीन गोष्ट बोलणे/प्रस्तुतीकरण."]}
-}
-        },
-     
-       
-        {id: 3, title: 'महत्त्वाकांक्षा चाचणीा', icon: '🎯', desc: 'ध्येय दबाव तपासा ', color: '#4ecdc4',
-         questions: [
-                {q: "मला माझ्या ध्येयांबाबत सतत स्वतःवर दबाव वाटतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "मला यशस्वी व्हायलाच हवे अशी भावना कायम असते", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3},
-                {q: "इतरांपेक्षा पुढे जाण्याची चिंता मला सतावते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "इतर लोकांची यशोगाथा पाहून मला स्वतःबद्दल अस्वस्थ वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "माझ्या कुटुंबाच्या अपेक्षा पूर्ण करण्याचा ताण मला जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "लोक माझ्याबद्दल काय विचार करतील याची मला चिंता असते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "अपयशाची कल्पनाही मला अस्वस्थ करते. ", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "चूक झाली तर सर्व काही संपेल असे मला वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "प्रयत्न करूनही यश मिळाले नाही तर मी स्वतःला दोष देतो/दोष देते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0},
-                {q: "माझ्या ध्येयांमुळे मी मानसिकदृष्ट्या थकलेलो/थकलेली वाटतो/वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0}
-            ],
-  results: {
-                0: {title: "अतिशय उच्च महत्वाकांक्षा! ", score: "76-100%", desc: "तुमच्यामध्ये स्पष्ट ध्येय, आत्मविश्वास आणि नेतृत्वगुण आहेत. तुम्ही मोठी स्वप्ने पाहता आणि ती पूर्ण करण्यासाठी सातत्याने प्रयत्न करता.",
-                    tips: [  "कामाचा ताण संतुलित ठेवा", "Overconfidence टाळा","Teamwork आणि collaboration वाढवा", "Mentor कडून मार्गदर्शन घ्या"]},
-                1: {title: "चउच्च महत्वाकांक्षा", score: "51-75%", desc: "तुमच्यात यशस्वी होण्याची तीव्र इच्छा आहे. योग्य मार्गदर्शन आणि प्रेरणा मिळाल्यास तुम्ही उत्तम कामगिरी करू शकता.",
-                    tips: [ "लहान पण स्पष्ट ध्येय ठरवा",  "निर्णय क्षमता सुधारण्यावर लक्ष द्या", "Self-motivation techniques वापरा","अपयशातून शिकण्याची सवय लावा"]},
-                2: {title: "मध्यम महत्वाकांक्षा", score: "26-50%", desc: "तुमची ध्येये मर्यादित आहेत. आत्मविश्वास आणि स्पष्ट दिशा मिळाल्यास प्रगती शक्य आहे.", 
-                    tips: [ "स्वतःच्या ताकदी ओळखा", "Short-term goals ठेवा", "नवीन skills शिकण्याचा प्रयत्न करा", "स्वतःवर अधिक विश्वास ठेवा"]},
-                3: {title: "कमी महत्वाकांक्षा", score: "0-25%", desc: "तुमच्यामध्ये आत्मविश्वासाची कमतरता दिसून येते. प्रेरणा आणि सकारात्मक मार्गदर्शनाची गरज आहे.",
-                    tips: ["नकारात्मक विचार कमी करा", "Positive लोकांच्या संपर्कात रहा", "लहान यश साजरे करा","Teacher किंवा counselor सोबत चर्चा करा"]}
-            }
-        },
-     
-        {id: 4, title: 'अभ्यास सवयी', icon: '📚', desc: 'अभ्यासाच्या सवयी तपासा', color: '#ff9ff3',
-         questions:[
-         {q:"मी दररोज ठराविक वेळ अभ्यासासाठी देतो/देते.?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"मी अभ्यासासाठी आधीच वेळापत्रक (Time Table) तयार करतो/करते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"अभ्यास करताना माझे लक्ष सहज विचलित होत नाही?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"मी मोबाईल/सोशल मिडियाचा वापर अभ्यासाच्या वेळेत टाळतो/टाळते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"अभ्यास करताना मी महत्त्वाच्या मुद्द्यांच्या नोंदी (Notes) काढतो/काढते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"मी परीक्षेसाठी आधीपासून नियोजन करतो/करते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"अभ्यास पूर्ण केल्यानंतर समाधान वाटते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"परीक्षेच्या आधी शेवटच्या क्षणी अभ्यास करण्याऐवजी मी नियमित अभ्यास करतो/करते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"मला अभ्यासात सातत्य ठेवता येते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"मी अभ्यासाचे उद्दिष्ट (Goal) ठरवून अभ्यास करतो/करते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0}],
-          results: {
-                0: {title: "उत्कृष्ट अभ्यास सवयी 🔥", score: "76% – 100%", desc: "तुम्ही नियमित, शिस्तबद्ध आणि एकाग्रतेने अभ्यास करता. वेळेचे योग्य नियोजन आणि पुनरावृत्तीमुळे तुमचे शिकणे प्रभावी आहे.", tips: ["ही सवय सातत्याने ठेवा",, "कठीण विषयांसाठी वेगळा वेळ द्याा", "self-assessment करा"]},
-                1: {title: " चांगल्या अभ्यास सवयी👍", score: "51% – 75% :", desc: "तुमच्या अभ्यास सवयी योग्य आहेत,थोड्या सुधारणा केल्यास उत्तम निकाल मिळू शकतो..", tips: ["ठराविक timetable पाळा",  "distractions कमी करा", "नियमित notes काढा."]},
-                2: {title: "मध्यम अभ्यास सवयी ⚠️", score: "26-50%", desc: "अभ्यासात सातत्य कमी असून नियोजनाची गरज आहे..", tips: [": छोटे daily goals ठेवा", "अभ्यासाची वेळ निश्चित करा ", " revision वाढवा"]},
-                3: {title: "कमी अभ्यास सवयी 🚀", score: "0-25%", desc: "अभ्यासाची सवय फार कमी आहे आणि प्रेरणेची गरज आहे..", tips: ["अभ्यासाची सुरुवात लहान टप्प्यांत करा", "routine तयार करा आणि नियमित मदत घ्या.", "शांत अभ्यासाचे वातावरण ठेवा, मोबाईल टाळा"]}
-            }
-         
-        },
-        {id: 5, title: 'संघटन कौशल्य चाचणी',  icon:'🗂️⏱️',desc: 'नियोजन कौशल्य तपासा ', color: '#54a0ff',
-         questions:[
-         {q:"मला माझा अभ्यास आणि इतर कामांचे नियोजन करणे कठीण जाते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"कामे वेळेवर पूर्ण न झाल्यामुळे मला ताण जाणवतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"मी अनेकदा शेवटच्या क्षणी कामे करतो/करते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"कोणते काम आधी करावे हे ठरवताना मला गोंधळ होतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"एकाच वेळी अनेक कामे असल्याने मी अस्वस्थ होतो/होते",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"महत्त्वाची कामे विसरल्यामुळे मला मानसिक ताण येतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"माझी वही, नोट्स किंवा अभ्यास साहित्य नीट मांडलेले नसते. ",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"आवश्यक गोष्टी वेळेवर सापडत नाहीत, त्यामुळे वेळ वाया जातो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"अस्ताव्यस्तपणामुळे माझ्या अभ्यासावर परिणाम होतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"अव्यवस्थेमुळे मी मानसिकदृष्ट्या थकलेलो/थकलेली वाटतो/वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3}],
-          results: {
-                0: {title: "उत्कृष्ट संघटन कौशल्य", score: "76% – 100%", desc: " तुम्ही तुमचा वेळ, कामे आणि जबाबदाऱ्या अत्यंत नियोजित पद्धतीने हाताळता, त्यामुळे ताण कमी आणि कार्यक्षमता जास्त राहते.", tips: [ "तुमची daily planning आणि time management पद्धत सातत्याने चालू ठेवा.","long-term goals आणि short-term tasks यांचा योग्य समतोल राखा.","तुमचे संघटन कौशल्य इतर विद्यार्थ्यांना मार्गदर्शन देण्यासाठी वापरा."]},
-                1: {title: " चांगले संघटन कौशल्य ", score: "51% – 75%", desc: "तुमचे संघटन कौशल्य चांगले आहे, मात्र कधी कधी नियोजनात ढिलाई झाल्याने ताण जाणवू शकतो",   tips:[ "दररोज सकाळी to-do list तयार करून महत्त्वाच्या कामांना प्राधान्य द्या.", "कामे वेळेत पूर्ण होण्यासाठी deadlines स्पष्टपणे लिहून ठेवा.", "अभ्यास आणि विश्रांती यामध्ये संतुलन राखण्याचा प्रयत्न करा."   ]},
-                2: {title: "मध्यम संघटन कौशल्य ", score: "26-50%",  desc: "संघटनाच्या कमतरतेमुळे कामे साठतात आणि त्यामुळे घाई व मानसिक ताण वाढतो.",  tips: ["मोठी कामे छोटे आणि सोपे टप्पे करून पूर्ण करण्याची सवय लावा.",  "ठराविक वेळेला अभ्यास, प्रोजेक्ट आणि विश्रांती यांचे नियोजन करा.","काम करताना मोबाईल आणि इतर distractions शक्यतो टाळा." ]},
-                3: {title: "कमी संघटन कौशल्य", score: "0-25%", desc: "संघटन कौशल्याचा अभाव अभ्यास, आत्मविश्वास आणि मानसिक स्वास्थ्यावर नकारात्मक परिणाम करत आहे ", tips: ["सुरुवातीला अगदी साधा daily routine तयार करून तो पाळण्याचा प्रयत्न करा.", "वेळेचे व्यवस्थापन शिकण्यासाठी planner किंवा mobile apps वापरा.", "गरज भासल्यास शिक्षक, मित्र किंवा mentor यांचे मार्गदर्शन घ्या"]}
-            }
-         
-        },
-        
-        {id: 6, title: 'शैक्षणिक ताण चाचणी', icon:'🎓🧠', desc: 'अभ्यासातील ताण तपासा  ', color: '#5f27cd',
-     
-         questions:[
-          {q:"अभ्यासाचा ताण मला नेहमी जाणवतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"अभ्यासक्रम (syllabus) खूप मोठा असल्यामुळे मला घाई वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"परीक्षांबद्दल विचार करताच मला चिंता वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"कमी गुण मिळण्याची भीती मला सतावते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"असाइनमेंट्स आणि प्रोजेक्ट्स वेळेवर पूर्ण करणे मला कठीण जाते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"अभ्यासासाठी पुरेसा वेळ मिळत नाही असे मला वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"इतर विद्यार्थ्यांशी तुलना केल्यामुळे मला ताण येतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"शिक्षकांच्या अपेक्षा पूर्ण करण्याचा दबाव मला जाणवतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"अभ्यासामुळे मला मानसिक थकवा जाणवतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"अभ्यासाचा ताण माझ्या झोपेवर किंवा आरोग्यावर परिणाम करतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3}],
-          results: {
-                0: {title: "पूर्णपणे तणावमुक्तय", score: "76% – 100%", desc: " तुम्ही तुमचा वेळ, कामे आणि जबाबदाऱ्या अत्यंत नियोजित पद्धतीने हाताळता, त्यामुळे ताण कमी आणि कार्यक्षमता जास्त राहते.", tips: [   "तुमच्या सध्याच्या अभ्यास सवयी आणि दिनक्रम असाच चालू ठेवा.",   "नियमित revision आणि self-check करून ही स्थिरता टिकवा.",   "अभ्यासासोबत विश्रांती आणि छंदांना वेळ देत राहा."]},
-                1: {title: " बहुतेक वेळा तणावमुक्त  ", score: "51% – 75%", desc: "तुमचा शैक्षणिक ताण चांगल्या नियंत्रणात असून तुम्ही बहुतांश वेळा शांत आणि आत्मविश्वासाने अभ्यास करता." ,   tips:[   "थोडेसे नियोजन सुधारून तुम्ही पूर्णपणे tension-free राहू शकता.",     "अभ्यासाचे वेळापत्रक थोडे अधिक स्पष्ट ठेवा.", "परीक्षेआधी घाई न करता steady अभ्यास ठेवा."]},
-                2: {title: "थोडासा ताण जाणवतो ", score: "26-50%",  desc: "कधी कधी अभ्यासाचा ताण जाणवतो, पण योग्य मार्गदर्शन आणि नियोजनाने तो सहज कमी करता येऊ शकतो.",  tips: ["अभ्यास छोटे भाग करून केल्यास ताण कमी होईल." , "स्वतःवर जास्त दडपण न घेता one step at a time पुढे जा.",  "नियमित झोप आणि विश्रांती घेतल्यास लक्ष केंद्रित राहील."]}, 
-                3: {title: "ताण कमी करण्याची गरज आहे", score: "0-25%", desc: "सध्या अभ्यासाचा ताण थोडा जास्त जाणवत असला तरी योग्य सवयी आणि मदतीने तो नक्कीच कमी करता येईल.", tips: ["साधा आणि realistic अभ्यास दिनक्रम तयार करा.", "अडचणी शिक्षक, मित्र किंवा कुटुंबीयांशी मोकळेपणाने बोला.", "स्वतःवर विश्वास ठेवा — हा टप्पा तात्पुरता आहे."]}
-          }
-        },
-      {id: 7, title: 'वैयक्तिक / कौटुंबिक चाचणी', icon:'👨‍👩‍👧', desc: 'भावनिक ताण तपासा ', color: '#00d2d3',
-     
-         questions:[
-          {q:"कौटुंबिक जबाबदाऱ्यांमुळे मला मानसिक ताण जाणवतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"घरातील समस्या माझ्या अभ्यासावर परिणाम करतात.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"कुटुंबातील अपेक्षा पूर्ण करण्याचा दबाव मला वाटतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"वैयक्तिक समस्यांमुळे माझे लक्ष अभ्यासावर लागत नाही.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"घरात किंवा वैयक्तिक आयुष्यातील तणाव मला अस्वस्थ करतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"माझ्या भावना कोणाशी शेअर कराव्यात हे मला कळत नाही.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"घरगुती वातावरणामुळे मला चिंता किंवा निराशा वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"वैयक्तिक कारणांमुळे माझा आत्मविश्वास कमी होतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"कौटुंबिक तणावामुळे मला थकवा जाणवतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"घरातील समस्यांमुळे मला एकटे किंवा समजून न घेतल्यासारखे वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3}],
-          results: {
-                0: {title: "भावनिकदृष्ट्या स्थिर 😊", score: "76% – 100%", desc: " तुम्ही वैयक्तिक आणि कौटुंबिक बाबी संतुलितपणे हाताळता आणि सध्या तुम्ही भावनिकदृष्ट्या स्थिर आहात.", tips: [ "तुमची संवाद आणि समजूतदारपणाची पद्धत अशीच चालू ठेवा.","कुटुंबासोबत quality time घालवत राहा.", "स्वतःच्या भावनांकडे लक्ष देत सकारात्मक सवयी जपा."]},
-                1: {title: "बहुतेक वेळा भावनिकदृष्ट्या ठीक 👍",score: "51% – 75%", desc: "कधीकधी वैयक्तिक किंवा कौटुंबिक तणाव जाणवतो, पण तुम्ही तो चांगल्या प्रकारे हाताळत आहात.",  tips:[ "मनातल्या गोष्टी विश्वासू व्यक्तीशी शेअर करत राहा.",  "तणाव वाढण्याआधी स्वतःसाठी थोडा वेळ काढा.",  "घर आणि अभ्यास यामध्ये संतुलन राखण्याचा प्रयत्न करा."]},
-                2: {title: "थोडासा भावनिक ताण जाणवतो ⚠️ ", score: "26-50%",  desc: "वैयक्तिक किंवा कौटुंबिक कारणांमुळे कधी कधी ताण जाणवतो, पण योग्य आधार मिळाल्यास तो नक्कीच कमी होऊ शकतो.", tips: ["स्वतःच्या भावना दाबून न ठेवता व्यक्त करा.",  "तणाव कमी करण्यासाठी relaxation किंवा छंदांचा आधार घ्या.",  "गरज भासल्यास मार्गदर्शक किंवा जवळच्या व्यक्तीशी बोला."]}, 
-                3: {title: "भावनिक आधाराची गरज आहे 🌱", score: "0-25%", desc: "सध्या वैयक्तिक किंवा कौटुंबिक तणाव जास्त जाणवत असला तरी योग्य मदत आणि वेळेमुळे परिस्थिती नक्की सुधारू शकते.",tips: [ "तुम्ही एकटे नाही आहात हे लक्षात ठेवा.", "विश्वासू व्यक्ती, शिक्षक किंवा counselor यांच्याशी संवाद साधा.", "स्वतःची काळजी घ्या आणि लहान सकारात्मक बदलांपासून सुरुवात करा."]}
-          }
-          
-        },
-         
-       {id: 8, title: 'झोप व जीवनशैली चाचणी ',icon:'😴' , desc: 'झोप सवयी तपासा ', color: '#ff9f43',
-         questions:[
-          {q:"मला दररोज पुरेशी झोप  मिळते .",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"मी ठराविक वेळेला झोपतो/झोपते आणि उठतो/उठते .",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"झोपेतून उठल्यानंतर मला ताजेतवाने वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"मोबाईल किंवा स्क्रीन वापरामुळे माझ्या झोपेवर परिणाम होत नाही.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"माझी झोप शांत आणि अडथळ्याविना होते",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"झोप न लागल्यामुळे माझ्या अभ्यासावर परिणाम होतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"दिवसभरात मला थकवा जाणवत नाही.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"माझी जीवनशैली (खाणे, व्यायाम, विश्रांती) संतुलित आहे.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-          {q:"मी रात्री उशिरापर्यंत जागतो/जागते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-          {q:"झोपेच्या अभावामुळे मला चिडचिड किंवा तणाव जाणवतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3}],
-        results: {
-                0: {title: "उत्तम झोप व संतुलित जीवनशैली 🌙", score: "76% – 100%", desc: "तुमची झोप आणि जीवनशैली अतिशय संतुलित असून तुम्ही शारीरिक व मानसिकदृष्ट्या तणावमुक्त आहात.", tips: [ "ही निरोगी दिनचर्या सातत्याने पाळत राहा.", "झोपेची वेळ आणि उठण्याची वेळ नियमित ठेवा.", "अभ्यासासोबत पुरेशी विश्रांती घ्या."]},
-                1: {title: "चांगली झोप व जीवनशैली 👍",score: "51% – 75%", desc: "झोप आणि जीवनशैलीमध्ये थोडा असंतुलन जाणवतो, पण योग्य नियोजनाने ते सहज सुधारता येऊ शकते.", tips:[ "झोपण्यापूर्वी मोबाईलचा वापर कमी करा.",  "दररोज किमान 7–8 तास झोप घेण्याचा प्रयत्न करा.","दिवसभर हलका व्यायाम किंवा चालणे जोडा."]},
-                2: {title: "झोपेच्या सवयींमध्ये सुधारणा गरजेची ⚠️ ", score: "26-50%",  desc: "वैयक्तिक किंवा कौटुंबिक कारणांमुळे कधी कधी ताण जाणवतो, पण योग्य आधार मिळाल्यास तो नक्कीच कमी होऊ शकतो.", tips: ["ठराविक झोपेची दिनचर्या तयार करा.",  "रात्री उशिरा अभ्यास टाळून वेळेचे नियोजन करा.",   "तणाव कमी करण्यासाठी शांत संगीत किंवा ध्यान करा."]}, 
-                3: {title: "झोप व जीवनशैलीकडे विशेष लक्ष द्या 🌱", score: "0-25%", desc: "सध्या झोपेचा अभाव आणि जीवनशैलीमुळे थकवा जाणवत असला तरी छोटे बदल मोठा सकारात्मक फरक घडवू शकतात.",tips: [ "लवकर झोपण्याची सवय लावा आणि स्क्रीन टाइम मर्यादित ठेवा.", "स्वतःच्या आरोग्याला प्राधान्य द्या.", "गरज वाटल्यास शिक्षक, पालक किंवा तज्ज्ञांचा सल्ला घ्या."]}
-          }
-        },
-        
 
-{id: 9, title: 'करिअर तयारी', icon: '💼', desc: 'प्रोफेशनल तयारी तपासा', color: '#00b894',
-        questions:[
-         {q: "मी माझ्या आवडत्या विषयांची यादी तयार केली आहे?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q:"मी विविध करियर पर्यायांची माहिती गोळा केली आहे?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q:"मी इंटर्नशिप किंवा प्रोजेक्ट्सद्वारे अनुभव घेतला आहे?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q:"माझे शॉर्ट टर्म आणि लॉंग टर्म करियर ध्येय निश्चित आहेत?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q: "मी रेझ्युमे आणि कव्हर लेटर तयार केले आहे?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q:"मी मुलाखतीची सराव केला आहे?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q:" मी नेटवर्किंग (LinkedIn इ.) सुरू केली आहे?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q:"मी आवश्यक कौशल्ये (सॉफ्ट स्किल्स, टेक्निकल) शिकत आहे?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q:"मी अपयश टाळण्यासाठी प्लॅन B तयार केला आहे?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0},
-         {q:"मी नियमित करियर प्रगतीचा आढावा घेतो/घेते?",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0}
-         ],
- results: {
-                0: {title: "उत्कृष्ट करियर तयारी ", score: "76-100%", desc: "तुम्ही करियरसाठी पूर्णपणे सज्ज, स्पष्ट ध्येय आणि उच्च आत्मविश्वास असलेले आहात.",
-                    tips: [  "तुम्ही करियरसाठी पूर्णपणे सज्ज आहात", "आत्मविश्वास आणि आवश्यक कौशल्ये आहेत.","तुम्ही संधी ओळखता आणि भविष्यासाठी ठोस पावले उचलताा."]},
-                1: {title: "चांगली करियर तयारी ", score: "51-75%", desc: "तुम्ही योग्य दिशेने आहात, थोडे मार्गदर्शन आणि कौशल्यविकास आवश्यक आहे. ",
-                    tips: [ "तुम्ही करियरच्या योग्य दिशेने वाटचाल करत आहात.",  "तुमच्याकडे करियरची मूलभूत कल्पना आहे, पण अजून थोडी स्पष्टता आणि कौशल्यविकासाची गरज आहे.", "योग्य मार्गदर्शन आणि सातत्य ठेवल्यास तुम्ही नक्कीच यशस्वी होऊ शकता. " ]},
-                2: {title: " मध्यम करियर तयारी", score: "26-50%", desc: " तुमची करियर तयारी मध्यम आहे; ध्येय स्पष्ट करण्याची गरज आहे.", 
-                    tips: [   "तुम्हाला करियरबाबत काही प्रमाणात माहिती आहे, पण ध्येय पूर्णपणे स्पष्ट नाही.", "कधी कधी गोंधळ, आत्मविश्वासाचा अभाव किंवा निर्णय घेण्यास अडचण येते.", "स्वतःची आवड, क्षमता आणि उपलब्ध संधी यांचा अभ्यास केल्यास तुम्हाला योग्य दिशा मिळू शकतेा"]},
-                3: {title: "कमी करियर तयारी", score: "0-25%", desc: "तुम्ही करियरबाबत गोंधळात आहात; योग्य मार्गदर्शन गरजेचे आहे..",
-                    tips: [" निर्णय टाळण्याची प्रवृत्ती दिसते.", "तुमची करियर तयारी कमी आहे.,तुम्हाला करियरबाबत स्पष्टता आणि आत्मविश्वासाची गरज आहे. ", "योग्य मार्गदर्शन आणि सातत्यपूर्ण प्रयत्नांनी सुधारणा शक्य आहे. "]}
-            }
- },
-     {id: 10, title: 'मोबाईल प्रभाव चाचणी', icon: '📱', desc: 'मोबाइल प्रभाव तपासा ', color: '#00b894',
-        questions:[
-         {q: "मी दररोज बराच वेळ मोबाईल वापरतो/वापरते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"मोबाईलमुळे माझ्या अभ्यासावर परिणाम होतो",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"अभ्यास करताना मोबाईलमुळे लक्ष विचलित होते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"झोपण्यापूर्वी मोबाईल वापरण्याची सवय आहे.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q: "मोबाईल नसेल तर मला अस्वस्थ वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"सोशल मीडियामुळे वेळ कसा जातो हे कळत नाही.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:" मोबाईल वापरामुळे माझी झोप कमी होते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"मोबाईल वापरानंतर थकवा किंवा डोकेदुखी जाणवते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"मोबाईलमुळे माझा अभ्यासाचा वेळ कमी होतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"मोबाईल वापर आणि अभ्यास यामध्ये संतुलन राखणे मला कठीण जाते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3}
-         ],
- results: {
-                0: {title: "मोबाईलचा संतुलित वापर 📵", score: "76-100%", desc: "तुम्ही मोबाईलचा योग्य आणि मर्यादित वापर करता आणि तो तुमच्या अभ्यासावर नकारात्मक परिणाम करत नाही.",
-                    tips: [    "मोबाईल वापर आणि अभ्यास यामधील संतुलन असेच ठेवा.",   "गरजेपुरताच मोबाईल वापरण्याची सवय कायम ठेवा.","डिजिटल सवयींबाबत स्वतःचे आत्मनियंत्रण जपा."]},
-                1: {title: "बहुतेक वेळा नियंत्रणात 👍", score: "51-75%", desc: "कधीकधी मोबाईलमुळे अडथळा येतो, पण तुम्ही बहुतेक वेळा तो योग्य प्रकारे हाताळता.",
-                    tips: [ "अभ्यासाच्या वेळी मोबाईल silent किंवा दूर ठेवा.", "सोशल मीडियासाठी ठराविक वेळ ठेवा.", "मोबाईलऐवजी थोडा वेळ वाचन किंवा विश्रांतीला द्या."]},
-                2: {title: " मोबाईल वापरात सुधारणा गरजेची ⚠️", score: "26-50%", desc:"मोबाईलचा वापर तुमच्या अभ्यास आणि झोपेवर परिणाम करत असला तरी योग्य बदलांनी तो नक्की सुधारू शकतो.",
-                    tips: [    "screen time मर्यादित करण्याचा प्रयत्न करा.",  "झोपण्यापूर्वी मोबाईल वापर टाळा.", "अभ्यासासाठी distraction-free environment तयार करा." ]},
-                3: {title: "डिजिटल सवयींकडे विशेष लक्ष द्या 🌱", score: "0-25%", desc: "सध्या मोबाईलचा प्रभाव जास्त जाणवत असला तरी हळूहळू बदल केल्यास तुम्ही नक्कीच अधिक focus आणि शांती मिळवू शकता.",
-                    tips: ["मोबाईल वापरासाठी daily limit ठरवा.", "मोबाईलपासून थोडे digital breaks घ्या.", "गरज वाटल्यास पालक किंवा शिक्षकांची मदत घ्या." ]}
-            }
-    },
-      {id: 11, title: 'उपस्थिती दबाव व कॉलेज नियम चाचणी', icon: '🏫📋', desc: 'उपस्थिती दबाव तपासा  ', color: '#00b894',
-        questions:[
-         {q: "कॉलेजची उपस्थिती (attendance) पूर्ण करण्याचा मला दबाव वाटतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"उपस्थिती कमी असल्यामुळे मला तणाव जाणवतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"कॉलेजचे नियम पाळताना मला मानसिक दडपण येते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"attendance मुळे आजारी असतानाही कॉलेजला यावे लागते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q: "कॉलेजचे नियम कधी कधी कठोर वाटतात.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"उपस्थितीशी संबंधित नोटीस किंवा warning मला अस्वस्थ करते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:" attendance आणि अभ्यास यामध्ये संतुलन राखणे कठीण जाते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"कॉलेजच्या नियमांमुळे माझ्या वैयक्तिक वेळेवर परिणाम होतो.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"उपस्थिती कमी असल्यास भविष्यातील परिणामांची चिंता वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:3},
-         {q:"कॉलेजचे नियम माझ्या शिकण्यास मदत करतात असे मला वाटते.",o:["हो","नाही","कधीकधी","कधीच नाही"],a:0}
-         ],
- results: {
-                0: {title:  "नियमांशी सुसंगत व तणावमुक्त 🌟", score: "76-100%", desc: "तुम्ही कॉलेजची उपस्थिती आणि नियम संतुलितपणे हाताळता आणि त्यामुळे तुम्ही मानसिकदृष्ट्या तणावमुक्त आहात.",
-                    tips: [ "तुमचे time management आणि जबाबदारीची भावना अशीच कायम ठेवा.",    "नियमांना learning-support system म्हणून पाहत राहा.","attendance आणि self-study यामध्ये योग्य balance ठेवा."]},
-                1: {title: "बहुतेक वेळा परिस्थिती नियंत्रणात 👍", score: "51-75%", desc: "कधीकधी उपस्थिती किंवा नियमांमुळे ताण जाणवतो, पण तुम्ही तो योग्य प्रकारे manage करत आहात.",
-                    tips: [ "attendance planning आधीच करून ठेवा.",  "गरज असल्यास शिक्षकांशी मोकळेपणाने संवाद साधा.",  "अनावश्यक चिंता टाळून practical approach ठेवा."]},
-                2: {title:  "थोडासा दबाव जाणवतो ⚠️", score: "26-50%", desc:"उपस्थिती आणि कॉलेज नियमांमुळे कधी कधी तणाव वाढतो, पण योग्य नियोजनाने तो नक्की कमी होऊ शकतो.",
-                    tips: [  "attendance कमी होण्याची कारणे ओळखा आणि त्यावर उपाय करा.",  "स्वतःसाठी realistic routine तयार करा.",  "तणाव वाढल्यास मार्गदर्शक किंवा class teacher शी बोला."]},
-                3: {title: "दबाव जास्त जाणवत आहे, पण सुधारणा शक्य आहे 🌱", score: "0-25%", desc: "सध्या उपस्थिती आणि नियमांचा ताण जास्त असला तरी योग्य मार्गदर्शन आणि सकारात्मक दृष्टिकोनाने परिस्थिती नक्की सुधारू शकते.",
-                    tips: ["तुम्ही एकटे नाही आहात—मदत मागणे योग्य आहे.", "attendance recovery plan तयार करा.",   "स्वतःवर विश्वास ठेवा आणि छोट्या सुधारणा सुरू करा." ]}
-            }
-    }
-     
-     
-    ];
+                results: {
+                    0: { title: "उत्तम भावनिक बुद्धीमत्ता ", score: "90-100%", desc: "तुम्ही भावना खूप चांगल्या हाताळता.", tips: ["तुमची ताकद कायम ठेवण्यासाठी दररोज १० मिनिटे जर्नलिंग करा ज्यात यशस्वी भावनिक क्षणांचा विचार करा.", "मेंटॉर म्हणून इतरांना EI शिकवा, ज्यामुळे तुमचे कौशल्य आणखी खोल आणि मजबूत होईल", "Leadership roles घ्या जिथे तुम्ही टीममधील भावना समजून घेऊन निर्णय घ्याल."] },
+                    1: { title: " चांगली भावनिक बुद्धीमत्ता ", score: " 70-89%  ", desc: "सामान्य पातळीवर आहात, आणखी सुधारणा शक्य.", tips: ["दैनिक भावना डायरी ठेवा - सकाळी आणि रात्री ५ मिनिटे लिहा 'आज मी काय भावना अनुभवल्या आणि त्यांचा अर्थ काय?", "सहानुभूती सराव: दिवसातून ३ वेळा एखाद्या व्यक्तीच्या शब्दांपेक्षा body language वर लक्ष द्या आणि त्यांच्या भावना अनुमान लावा.", "मिरर टेक्निक: आरशासमोर स्वतःशी बोलून विविध भावनांमध्ये प्रतिक्रिया दाखवा आणि स्वतःला शांत करा"] },
+                    2: { title: " मध्यम भावनिक बुद्धीमत्ता  ", score: " 50-69%  ", desc: "भावना नियंत्रण वाढवण्याची गरज आहे.", tips: ["ट्रिगर मॅपिंग: प्रत्येक आठवडा तुम्हाला संताप/चिंता होणारे ५ ट्रिगर्स नोंदवा आणि त्यांचे मूळ कारण शोधा.", "STOP टेक्निक शिका: Stop(थांबा)-Take deep breath(श्वास घ्या)-Observe(निरीक्षण करा)-Proceed(पुढे जा) ही ४ पायरी प्रत्येक conflict मध्ये वापरा.", "Feedback circle बनवा: ३ विश्वासू मित्रांपासून दरमहा 'माझ्या भावनिक हाताळणीबद्दल' feedback घ्या."] },
+                    3: { title: "कमी भावनिक बुद्धीमत्ता ", score: "  0-49% ", desc: "लवकर मूलभूत कौशल्ये विकसित करा.", tips: ["आठवड्यातून २ वेळा काउन्सेलर/थेरपिस्ट भेटा जो CBT (Cognitive Behavioral Therapy) करते, जी भावनिक patterns बदलते.", "'Emotional Intelligence 2.0' पुस्तक + workbook घ्या आणि दररोज १ व्यायाम (१५ मिनिटे) करा ३० दिवस.", "EI समूह कार्यशाळा जॉईन करा किंवा WhatsApp study group बनवा जिथे आठवड्यातून १ दा role-plays करता येतील."] },
+                }
+            },
 
-    // 1. LOGIN HANDLING  
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const studentData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            college: document.getElementById('college').value,
-            std: document.getElementById('std').value
-        };
-        
-        try {
-            const response = await fetch('/api/login', {
+            {
+                id: 2, title: 'आत्मविश्वास', icon: '💪', desc: 'स्वतःवरील विश्वास मोजा', color: '#feca57',
+                questions: [
+                    { q: "स्वतःवर विश्वास असतो ?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी कोलेजमधील नवीन आव्हानांना सामोरे जाऊ शकतो/शकते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "गट प्रकल्पात मी नेतृत्व घेतो/घेते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "अपयश सहन करता येतं?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "लक्ष्य गाठता येतात?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "स्वतःची प्रशंसा करता?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मित्र/मैत्रिणीन मध्ये मी स्वतःला कमी लेखत नाही. ?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "नवीन लोकांना भेटता?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "स्वतःला कमी समजता?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "प्रेझेंटेशन देताना घाबरत नाही?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 }
+                ],
+
+
+                results: {
+                    0: { title: "उत्तम आत्मविश्वास! 🔥", score: "90-100%", desc: "तुमचं आत्मविश्वास खूपच चांगलं आहे.", tips: ["इतरांना प्रेरणा द्या - तुमच्या अनुभव शेअर करा आणि मेंटॉर म्हणून काम करा, ज्यामुळे तुमचं आत्मविश्वास आणखी मजबूत होईल.", "लक्ष्ये वाढवा - आता मोठी, दीर्घकालीन ध्येये घ्या आणि roadmap बनवा, तुमची क्षमता दाखवण्यासाठी.", "लीडरशिप रोल्स घ्या - टीम लीड किंवा प्रोजेक्ट हेड म्हणून जबाबदारी घ्या, जिथे तुम्ही निर्णय घेऊ शकाल."] },
+                    1: { title: "चांगला आत्मविश्वास 👍", score: "70-89%", desc: "अजून सुधारणा करा.", tips: ["सकारात्मक बोलणे सराव - आरशासमोर 'मी हे करू शकतो/शकते' १० वेळा म्हणा आणि दिवसभर positive affirmations वापरा.", "प्रॅक्टिस करा - public speaking group जॉईन करा किंवा दररोज १ नवीन गोष्ट बोलण्याचा सराव करा.", "छोटी यश साजरी करा - प्रत्येक छोटं यश नोट करा आणि स्वतःला बक्षीस द्या (चॉकलेट/फिल्म)."] },
+                    2: { title: "मध्यम आत्मविश्वास ⚠️", score: "50-69%", desc: "सुधारणा आवश्यक.", tips: ["स्वतःची प्रशंसा करा - दररोज ३ चांगल्या गोष्टी लिहा ज्यात तुम्ही चांगले आहात (talents/गुणवत्ता).", "छोटे पाऊल घ्या - 'no' म्हणण्यापासून सुरुवात करा आणि हळूहळू मोठ्या निर्णय घ्या.", "प्रोफेशनल मदत घ्या - confidence coach किंवा Toastmasters club जॉईन करा ३ महिन्यांसाठी."] },
+                    3: { title: "आत्मविश्वास वाढवा 🚀", score: "0-49%", desc: "लवकर सुधारणा करा.", tips: ["काउन्सेलरला भेटा - CBT थेरपी घ्या जी self-doubt चे मूळ कारण शोधते आणि patterns बदलते.", "सकारात्मक विचार सराव - 'Power Pose' (Superman pose) २ मिनिटे सकाळी करा + gratitude journal.", "प्रॅक्टिस प्रोग्राम - ३० दिवस 'confidence challenge' : रोज १ नवीन गोष्ट बोलणे/प्रस्तुतीकरण."] }
+                }
+            },
+
+
+            {
+                id: 3, title: 'महत्त्वाकांक्षा चाचणीा', icon: '🎯', desc: 'ध्येय दबाव तपासा ', color: '#4ecdc4',
+                questions: [
+                    { q: "मला माझ्या ध्येयांबाबत सतत स्वतःवर दबाव वाटतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मला यशस्वी व्हायलाच हवे अशी भावना कायम असते", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "इतरांपेक्षा पुढे जाण्याची चिंता मला सतावते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "इतर लोकांची यशोगाथा पाहून मला स्वतःबद्दल अस्वस्थ वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "माझ्या कुटुंबाच्या अपेक्षा पूर्ण करण्याचा ताण मला जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "लोक माझ्याबद्दल काय विचार करतील याची मला चिंता असते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "अपयशाची कल्पनाही मला अस्वस्थ करते. ", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "चूक झाली तर सर्व काही संपेल असे मला वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "प्रयत्न करूनही यश मिळाले नाही तर मी स्वतःला दोष देतो/दोष देते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "माझ्या ध्येयांमुळे मी मानसिकदृष्ट्या थकलेलो/थकलेली वाटतो/वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 }
+                ],
+                results: {
+                    0: {
+                        title: "अतिशय उच्च महत्वाकांक्षा! ", score: "76-100%", desc: "तुमच्यामध्ये स्पष्ट ध्येय, आत्मविश्वास आणि नेतृत्वगुण आहेत. तुम्ही मोठी स्वप्ने पाहता आणि ती पूर्ण करण्यासाठी सातत्याने प्रयत्न करता.",
+                        tips: ["कामाचा ताण संतुलित ठेवा", "Overconfidence टाळा", "Teamwork आणि collaboration वाढवा", "Mentor कडून मार्गदर्शन घ्या"]
+                    },
+                    1: {
+                        title: "चउच्च महत्वाकांक्षा", score: "51-75%", desc: "तुमच्यात यशस्वी होण्याची तीव्र इच्छा आहे. योग्य मार्गदर्शन आणि प्रेरणा मिळाल्यास तुम्ही उत्तम कामगिरी करू शकता.",
+                        tips: ["लहान पण स्पष्ट ध्येय ठरवा", "निर्णय क्षमता सुधारण्यावर लक्ष द्या", "Self-motivation techniques वापरा", "अपयशातून शिकण्याची सवय लावा"]
+                    },
+                    2: {
+                        title: "मध्यम महत्वाकांक्षा", score: "26-50%", desc: "तुमची ध्येये मर्यादित आहेत. आत्मविश्वास आणि स्पष्ट दिशा मिळाल्यास प्रगती शक्य आहे.",
+                        tips: ["स्वतःच्या ताकदी ओळखा", "Short-term goals ठेवा", "नवीन skills शिकण्याचा प्रयत्न करा", "स्वतःवर अधिक विश्वास ठेवा"]
+                    },
+                    3: {
+                        title: "कमी महत्वाकांक्षा", score: "0-25%", desc: "तुमच्यामध्ये आत्मविश्वासाची कमतरता दिसून येते. प्रेरणा आणि सकारात्मक मार्गदर्शनाची गरज आहे.",
+                        tips: ["नकारात्मक विचार कमी करा", "Positive लोकांच्या संपर्कात रहा", "लहान यश साजरे करा", "Teacher किंवा counselor सोबत चर्चा करा"]
+                    }
+                }
+            },
+
+            {
+                id: 4, title: 'अभ्यास सवयी', icon: '📚', desc: 'अभ्यासाच्या सवयी तपासा', color: '#ff9ff3',
+                questions: [
+                    { q: "मी दररोज ठराविक वेळ अभ्यासासाठी देतो/देते.?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी अभ्यासासाठी आधीच वेळापत्रक (Time Table) तयार करतो/करते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "अभ्यास करताना माझे लक्ष सहज विचलित होत नाही?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी मोबाईल/सोशल मिडियाचा वापर अभ्यासाच्या वेळेत टाळतो/टाळते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "अभ्यास करताना मी महत्त्वाच्या मुद्द्यांच्या नोंदी (Notes) काढतो/काढते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी परीक्षेसाठी आधीपासून नियोजन करतो/करते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "अभ्यास पूर्ण केल्यानंतर समाधान वाटते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "परीक्षेच्या आधी शेवटच्या क्षणी अभ्यास करण्याऐवजी मी नियमित अभ्यास करतो/करते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मला अभ्यासात सातत्य ठेवता येते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी अभ्यासाचे उद्दिष्ट (Goal) ठरवून अभ्यास करतो/करते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 }],
+                results: {
+                    0: { title: "उत्कृष्ट अभ्यास सवयी 🔥", score: "76% – 100%", desc: "तुम्ही नियमित, शिस्तबद्ध आणि एकाग्रतेने अभ्यास करता. वेळेचे योग्य नियोजन आणि पुनरावृत्तीमुळे तुमचे शिकणे प्रभावी आहे.", tips: ["ही सवय सातत्याने ठेवा", , "कठीण विषयांसाठी वेगळा वेळ द्याा", "self-assessment करा"] },
+                    1: { title: " चांगल्या अभ्यास सवयी👍", score: "51% – 75% :", desc: "तुमच्या अभ्यास सवयी योग्य आहेत,थोड्या सुधारणा केल्यास उत्तम निकाल मिळू शकतो..", tips: ["ठराविक timetable पाळा", "distractions कमी करा", "नियमित notes काढा."] },
+                    2: { title: "मध्यम अभ्यास सवयी ⚠️", score: "26-50%", desc: "अभ्यासात सातत्य कमी असून नियोजनाची गरज आहे..", tips: [": छोटे daily goals ठेवा", "अभ्यासाची वेळ निश्चित करा ", " revision वाढवा"] },
+                    3: { title: "कमी अभ्यास सवयी 🚀", score: "0-25%", desc: "अभ्यासाची सवय फार कमी आहे आणि प्रेरणेची गरज आहे..", tips: ["अभ्यासाची सुरुवात लहान टप्प्यांत करा", "routine तयार करा आणि नियमित मदत घ्या.", "शांत अभ्यासाचे वातावरण ठेवा, मोबाईल टाळा"] }
+                }
+
+            },
+            {
+                id: 5, title: 'संघटन कौशल्य चाचणी', icon: '🗂️⏱️', desc: 'नियोजन कौशल्य तपासा ', color: '#54a0ff',
+                questions: [
+                    { q: "मला माझा अभ्यास आणि इतर कामांचे नियोजन करणे कठीण जाते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कामे वेळेवर पूर्ण न झाल्यामुळे मला ताण जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "मी अनेकदा शेवटच्या क्षणी कामे करतो/करते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कोणते काम आधी करावे हे ठरवताना मला गोंधळ होतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "एकाच वेळी अनेक कामे असल्याने मी अस्वस्थ होतो/होते", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "महत्त्वाची कामे विसरल्यामुळे मला मानसिक ताण येतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "माझी वही, नोट्स किंवा अभ्यास साहित्य नीट मांडलेले नसते. ", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "आवश्यक गोष्टी वेळेवर सापडत नाहीत, त्यामुळे वेळ वाया जातो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "अस्ताव्यस्तपणामुळे माझ्या अभ्यासावर परिणाम होतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "अव्यवस्थेमुळे मी मानसिकदृष्ट्या थकलेलो/थकलेली वाटतो/वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 }],
+                results: {
+                    0: { title: "उत्कृष्ट संघटन कौशल्य", score: "76% – 100%", desc: " तुम्ही तुमचा वेळ, कामे आणि जबाबदाऱ्या अत्यंत नियोजित पद्धतीने हाताळता, त्यामुळे ताण कमी आणि कार्यक्षमता जास्त राहते.", tips: ["तुमची daily planning आणि time management पद्धत सातत्याने चालू ठेवा.", "long-term goals आणि short-term tasks यांचा योग्य समतोल राखा.", "तुमचे संघटन कौशल्य इतर विद्यार्थ्यांना मार्गदर्शन देण्यासाठी वापरा."] },
+                    1: { title: " चांगले संघटन कौशल्य ", score: "51% – 75%", desc: "तुमचे संघटन कौशल्य चांगले आहे, मात्र कधी कधी नियोजनात ढिलाई झाल्याने ताण जाणवू शकतो", tips: ["दररोज सकाळी to-do list तयार करून महत्त्वाच्या कामांना प्राधान्य द्या.", "कामे वेळेत पूर्ण होण्यासाठी deadlines स्पष्टपणे लिहून ठेवा.", "अभ्यास आणि विश्रांती यामध्ये संतुलन राखण्याचा प्रयत्न करा."] },
+                    2: { title: "मध्यम संघटन कौशल्य ", score: "26-50%", desc: "संघटनाच्या कमतरतेमुळे कामे साठतात आणि त्यामुळे घाई व मानसिक ताण वाढतो.", tips: ["मोठी कामे छोटे आणि सोपे टप्पे करून पूर्ण करण्याची सवय लावा.", "ठराविक वेळेला अभ्यास, प्रोजेक्ट आणि विश्रांती यांचे नियोजन करा.", "काम करताना मोबाईल आणि इतर distractions शक्यतो टाळा."] },
+                    3: { title: "कमी संघटन कौशल्य", score: "0-25%", desc: "संघटन कौशल्याचा अभाव अभ्यास, आत्मविश्वास आणि मानसिक स्वास्थ्यावर नकारात्मक परिणाम करत आहे ", tips: ["सुरुवातीला अगदी साधा daily routine तयार करून तो पाळण्याचा प्रयत्न करा.", "वेळेचे व्यवस्थापन शिकण्यासाठी planner किंवा mobile apps वापरा.", "गरज भासल्यास शिक्षक, मित्र किंवा mentor यांचे मार्गदर्शन घ्या"] }
+                }
+
+            },
+
+            {
+                id: 6, title: 'शैक्षणिक ताण चाचणी', icon: '🎓🧠', desc: 'अभ्यासातील ताण तपासा  ', color: '#5f27cd',
+
+                questions: [
+                    { q: "अभ्यासाचा ताण मला नेहमी जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "अभ्यासक्रम (syllabus) खूप मोठा असल्यामुळे मला घाई वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "परीक्षांबद्दल विचार करताच मला चिंता वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कमी गुण मिळण्याची भीती मला सतावते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "असाइनमेंट्स आणि प्रोजेक्ट्स वेळेवर पूर्ण करणे मला कठीण जाते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "अभ्यासासाठी पुरेसा वेळ मिळत नाही असे मला वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "इतर विद्यार्थ्यांशी तुलना केल्यामुळे मला ताण येतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "शिक्षकांच्या अपेक्षा पूर्ण करण्याचा दबाव मला जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "अभ्यासामुळे मला मानसिक थकवा जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "अभ्यासाचा ताण माझ्या झोपेवर किंवा आरोग्यावर परिणाम करतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 }],
+                results: {
+                    0: { title: "पूर्णपणे तणावमुक्तय", score: "76% – 100%", desc: " तुम्ही तुमचा वेळ, कामे आणि जबाबदाऱ्या अत्यंत नियोजित पद्धतीने हाताळता, त्यामुळे ताण कमी आणि कार्यक्षमता जास्त राहते.", tips: ["तुमच्या सध्याच्या अभ्यास सवयी आणि दिनक्रम असाच चालू ठेवा.", "नियमित revision आणि self-check करून ही स्थिरता टिकवा.", "अभ्यासासोबत विश्रांती आणि छंदांना वेळ देत राहा."] },
+                    1: { title: " बहुतेक वेळा तणावमुक्त  ", score: "51% – 75%", desc: "तुमचा शैक्षणिक ताण चांगल्या नियंत्रणात असून तुम्ही बहुतांश वेळा शांत आणि आत्मविश्वासाने अभ्यास करता.", tips: ["थोडेसे नियोजन सुधारून तुम्ही पूर्णपणे tension-free राहू शकता.", "अभ्यासाचे वेळापत्रक थोडे अधिक स्पष्ट ठेवा.", "परीक्षेआधी घाई न करता steady अभ्यास ठेवा."] },
+                    2: { title: "थोडासा ताण जाणवतो ", score: "26-50%", desc: "कधी कधी अभ्यासाचा ताण जाणवतो, पण योग्य मार्गदर्शन आणि नियोजनाने तो सहज कमी करता येऊ शकतो.", tips: ["अभ्यास छोटे भाग करून केल्यास ताण कमी होईल.", "स्वतःवर जास्त दडपण न घेता one step at a time पुढे जा.", "नियमित झोप आणि विश्रांती घेतल्यास लक्ष केंद्रित राहील."] },
+                    3: { title: "ताण कमी करण्याची गरज आहे", score: "0-25%", desc: "सध्या अभ्यासाचा ताण थोडा जास्त जाणवत असला तरी योग्य सवयी आणि मदतीने तो नक्कीच कमी करता येईल.", tips: ["साधा आणि realistic अभ्यास दिनक्रम तयार करा.", "अडचणी शिक्षक, मित्र किंवा कुटुंबीयांशी मोकळेपणाने बोला.", "स्वतःवर विश्वास ठेवा — हा टप्पा तात्पुरता आहे."] }
+                }
+            },
+            {
+                id: 7, title: 'वैयक्तिक / कौटुंबिक चाचणी', icon: '👨‍👩‍👧', desc: 'भावनिक ताण तपासा ', color: '#00d2d3',
+
+                questions: [
+                    { q: "कौटुंबिक जबाबदाऱ्यांमुळे मला मानसिक ताण जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "घरातील समस्या माझ्या अभ्यासावर परिणाम करतात.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कुटुंबातील अपेक्षा पूर्ण करण्याचा दबाव मला वाटतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "वैयक्तिक समस्यांमुळे माझे लक्ष अभ्यासावर लागत नाही.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "घरात किंवा वैयक्तिक आयुष्यातील तणाव मला अस्वस्थ करतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "माझ्या भावना कोणाशी शेअर कराव्यात हे मला कळत नाही.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "घरगुती वातावरणामुळे मला चिंता किंवा निराशा वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "वैयक्तिक कारणांमुळे माझा आत्मविश्वास कमी होतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कौटुंबिक तणावामुळे मला थकवा जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "घरातील समस्यांमुळे मला एकटे किंवा समजून न घेतल्यासारखे वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 }],
+                results: {
+                    0: { title: "भावनिकदृष्ट्या स्थिर 😊", score: "76% – 100%", desc: " तुम्ही वैयक्तिक आणि कौटुंबिक बाबी संतुलितपणे हाताळता आणि सध्या तुम्ही भावनिकदृष्ट्या स्थिर आहात.", tips: ["तुमची संवाद आणि समजूतदारपणाची पद्धत अशीच चालू ठेवा.", "कुटुंबासोबत quality time घालवत राहा.", "स्वतःच्या भावनांकडे लक्ष देत सकारात्मक सवयी जपा."] },
+                    1: { title: "बहुतेक वेळा भावनिकदृष्ट्या ठीक 👍", score: "51% – 75%", desc: "कधीकधी वैयक्तिक किंवा कौटुंबिक तणाव जाणवतो, पण तुम्ही तो चांगल्या प्रकारे हाताळत आहात.", tips: ["मनातल्या गोष्टी विश्वासू व्यक्तीशी शेअर करत राहा.", "तणाव वाढण्याआधी स्वतःसाठी थोडा वेळ काढा.", "घर आणि अभ्यास यामध्ये संतुलन राखण्याचा प्रयत्न करा."] },
+                    2: { title: "थोडासा भावनिक ताण जाणवतो ⚠️ ", score: "26-50%", desc: "वैयक्तिक किंवा कौटुंबिक कारणांमुळे कधी कधी ताण जाणवतो, पण योग्य आधार मिळाल्यास तो नक्कीच कमी होऊ शकतो.", tips: ["स्वतःच्या भावना दाबून न ठेवता व्यक्त करा.", "तणाव कमी करण्यासाठी relaxation किंवा छंदांचा आधार घ्या.", "गरज भासल्यास मार्गदर्शक किंवा जवळच्या व्यक्तीशी बोला."] },
+                    3: { title: "भावनिक आधाराची गरज आहे 🌱", score: "0-25%", desc: "सध्या वैयक्तिक किंवा कौटुंबिक तणाव जास्त जाणवत असला तरी योग्य मदत आणि वेळेमुळे परिस्थिती नक्की सुधारू शकते.", tips: ["तुम्ही एकटे नाही आहात हे लक्षात ठेवा.", "विश्वासू व्यक्ती, शिक्षक किंवा counselor यांच्याशी संवाद साधा.", "स्वतःची काळजी घ्या आणि लहान सकारात्मक बदलांपासून सुरुवात करा."] }
+                }
+
+            },
+
+            {
+                id: 8, title: 'झोप व जीवनशैली चाचणी ', icon: '😴', desc: 'झोप सवयी तपासा ', color: '#ff9f43',
+                questions: [
+                    { q: "मला दररोज पुरेशी झोप  मिळते .", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी ठराविक वेळेला झोपतो/झोपते आणि उठतो/उठते .", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "झोपेतून उठल्यानंतर मला ताजेतवाने वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मोबाईल किंवा स्क्रीन वापरामुळे माझ्या झोपेवर परिणाम होत नाही.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "माझी झोप शांत आणि अडथळ्याविना होते", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "झोप न लागल्यामुळे माझ्या अभ्यासावर परिणाम होतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "दिवसभरात मला थकवा जाणवत नाही.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "माझी जीवनशैली (खाणे, व्यायाम, विश्रांती) संतुलित आहे.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी रात्री उशिरापर्यंत जागतो/जागते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "झोपेच्या अभावामुळे मला चिडचिड किंवा तणाव जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 }],
+                results: {
+                    0: { title: "उत्तम झोप व संतुलित जीवनशैली 🌙", score: "76% – 100%", desc: "तुमची झोप आणि जीवनशैली अतिशय संतुलित असून तुम्ही शारीरिक व मानसिकदृष्ट्या तणावमुक्त आहात.", tips: ["ही निरोगी दिनचर्या सातत्याने पाळत राहा.", "झोपेची वेळ आणि उठण्याची वेळ नियमित ठेवा.", "अभ्यासासोबत पुरेशी विश्रांती घ्या."] },
+                    1: { title: "चांगली झोप व जीवनशैली 👍", score: "51% – 75%", desc: "झोप आणि जीवनशैलीमध्ये थोडा असंतुलन जाणवतो, पण योग्य नियोजनाने ते सहज सुधारता येऊ शकते.", tips: ["झोपण्यापूर्वी मोबाईलचा वापर कमी करा.", "दररोज किमान 7–8 तास झोप घेण्याचा प्रयत्न करा.", "दिवसभर हलका व्यायाम किंवा चालणे जोडा."] },
+                    2: { title: "झोपेच्या सवयींमध्ये सुधारणा गरजेची ⚠️ ", score: "26-50%", desc: "वैयक्तिक किंवा कौटुंबिक कारणांमुळे कधी कधी ताण जाणवतो, पण योग्य आधार मिळाल्यास तो नक्कीच कमी होऊ शकतो.", tips: ["ठराविक झोपेची दिनचर्या तयार करा.", "रात्री उशिरा अभ्यास टाळून वेळेचे नियोजन करा.", "तणाव कमी करण्यासाठी शांत संगीत किंवा ध्यान करा."] },
+                    3: { title: "झोप व जीवनशैलीकडे विशेष लक्ष द्या 🌱", score: "0-25%", desc: "सध्या झोपेचा अभाव आणि जीवनशैलीमुळे थकवा जाणवत असला तरी छोटे बदल मोठा सकारात्मक फरक घडवू शकतात.", tips: ["लवकर झोपण्याची सवय लावा आणि स्क्रीन टाइम मर्यादित ठेवा.", "स्वतःच्या आरोग्याला प्राधान्य द्या.", "गरज वाटल्यास शिक्षक, पालक किंवा तज्ज्ञांचा सल्ला घ्या."] }
+                }
+            },
+
+
+            {
+                id: 9, title: 'करिअर तयारी', icon: '💼', desc: 'प्रोफेशनल तयारी तपासा', color: '#00b894',
+                questions: [
+                    { q: "मी माझ्या आवडत्या विषयांची यादी तयार केली आहे?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी विविध करियर पर्यायांची माहिती गोळा केली आहे?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी इंटर्नशिप किंवा प्रोजेक्ट्सद्वारे अनुभव घेतला आहे?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "माझे शॉर्ट टर्म आणि लॉंग टर्म करियर ध्येय निश्चित आहेत?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी रेझ्युमे आणि कव्हर लेटर तयार केले आहे?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी मुलाखतीची सराव केला आहे?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: " मी नेटवर्किंग (LinkedIn इ.) सुरू केली आहे?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी आवश्यक कौशल्ये (सॉफ्ट स्किल्स, टेक्निकल) शिकत आहे?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी अपयश टाळण्यासाठी प्लॅन B तयार केला आहे?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 },
+                    { q: "मी नियमित करियर प्रगतीचा आढावा घेतो/घेते?", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 }
+                ],
+                results: {
+                    0: {
+                        title: "उत्कृष्ट करियर तयारी ", score: "76-100%", desc: "तुम्ही करियरसाठी पूर्णपणे सज्ज, स्पष्ट ध्येय आणि उच्च आत्मविश्वास असलेले आहात.",
+                        tips: ["तुम्ही करियरसाठी पूर्णपणे सज्ज आहात", "आत्मविश्वास आणि आवश्यक कौशल्ये आहेत.", "तुम्ही संधी ओळखता आणि भविष्यासाठी ठोस पावले उचलताा."]
+                    },
+                    1: {
+                        title: "चांगली करियर तयारी ", score: "51-75%", desc: "तुम्ही योग्य दिशेने आहात, थोडे मार्गदर्शन आणि कौशल्यविकास आवश्यक आहे. ",
+                        tips: ["तुम्ही करियरच्या योग्य दिशेने वाटचाल करत आहात.", "तुमच्याकडे करियरची मूलभूत कल्पना आहे, पण अजून थोडी स्पष्टता आणि कौशल्यविकासाची गरज आहे.", "योग्य मार्गदर्शन आणि सातत्य ठेवल्यास तुम्ही नक्कीच यशस्वी होऊ शकता. "]
+                    },
+                    2: {
+                        title: " मध्यम करियर तयारी", score: "26-50%", desc: " तुमची करियर तयारी मध्यम आहे; ध्येय स्पष्ट करण्याची गरज आहे.",
+                        tips: ["तुम्हाला करियरबाबत काही प्रमाणात माहिती आहे, पण ध्येय पूर्णपणे स्पष्ट नाही.", "कधी कधी गोंधळ, आत्मविश्वासाचा अभाव किंवा निर्णय घेण्यास अडचण येते.", "स्वतःची आवड, क्षमता आणि उपलब्ध संधी यांचा अभ्यास केल्यास तुम्हाला योग्य दिशा मिळू शकतेा"]
+                    },
+                    3: {
+                        title: "कमी करियर तयारी", score: "0-25%", desc: "तुम्ही करियरबाबत गोंधळात आहात; योग्य मार्गदर्शन गरजेचे आहे..",
+                        tips: [" निर्णय टाळण्याची प्रवृत्ती दिसते.", "तुमची करियर तयारी कमी आहे.,तुम्हाला करियरबाबत स्पष्टता आणि आत्मविश्वासाची गरज आहे. ", "योग्य मार्गदर्शन आणि सातत्यपूर्ण प्रयत्नांनी सुधारणा शक्य आहे. "]
+                    }
+                }
+            },
+            {
+                id: 10, title: 'मोबाईल प्रभाव चाचणी', icon: '📱', desc: 'मोबाइल प्रभाव तपासा ', color: '#00b894',
+                questions: [
+                    { q: "मी दररोज बराच वेळ मोबाईल वापरतो/वापरते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "मोबाईलमुळे माझ्या अभ्यासावर परिणाम होतो", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "अभ्यास करताना मोबाईलमुळे लक्ष विचलित होते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "झोपण्यापूर्वी मोबाईल वापरण्याची सवय आहे.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "मोबाईल नसेल तर मला अस्वस्थ वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "सोशल मीडियामुळे वेळ कसा जातो हे कळत नाही.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: " मोबाईल वापरामुळे माझी झोप कमी होते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "मोबाईल वापरानंतर थकवा किंवा डोकेदुखी जाणवते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "मोबाईलमुळे माझा अभ्यासाचा वेळ कमी होतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "मोबाईल वापर आणि अभ्यास यामध्ये संतुलन राखणे मला कठीण जाते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 }
+                ],
+                results: {
+                    0: {
+                        title: "मोबाईलचा संतुलित वापर 📵", score: "76-100%", desc: "तुम्ही मोबाईलचा योग्य आणि मर्यादित वापर करता आणि तो तुमच्या अभ्यासावर नकारात्मक परिणाम करत नाही.",
+                        tips: ["मोबाईल वापर आणि अभ्यास यामधील संतुलन असेच ठेवा.", "गरजेपुरताच मोबाईल वापरण्याची सवय कायम ठेवा.", "डिजिटल सवयींबाबत स्वतःचे आत्मनियंत्रण जपा."]
+                    },
+                    1: {
+                        title: "बहुतेक वेळा नियंत्रणात 👍", score: "51-75%", desc: "कधीकधी मोबाईलमुळे अडथळा येतो, पण तुम्ही बहुतेक वेळा तो योग्य प्रकारे हाताळता.",
+                        tips: ["अभ्यासाच्या वेळी मोबाईल silent किंवा दूर ठेवा.", "सोशल मीडियासाठी ठराविक वेळ ठेवा.", "मोबाईलऐवजी थोडा वेळ वाचन किंवा विश्रांतीला द्या."]
+                    },
+                    2: {
+                        title: " मोबाईल वापरात सुधारणा गरजेची ⚠️", score: "26-50%", desc: "मोबाईलचा वापर तुमच्या अभ्यास आणि झोपेवर परिणाम करत असला तरी योग्य बदलांनी तो नक्की सुधारू शकतो.",
+                        tips: ["screen time मर्यादित करण्याचा प्रयत्न करा.", "झोपण्यापूर्वी मोबाईल वापर टाळा.", "अभ्यासासाठी distraction-free environment तयार करा."]
+                    },
+                    3: {
+                        title: "डिजिटल सवयींकडे विशेष लक्ष द्या 🌱", score: "0-25%", desc: "सध्या मोबाईलचा प्रभाव जास्त जाणवत असला तरी हळूहळू बदल केल्यास तुम्ही नक्कीच अधिक focus आणि शांती मिळवू शकता.",
+                        tips: ["मोबाईल वापरासाठी daily limit ठरवा.", "मोबाईलपासून थोडे digital breaks घ्या.", "गरज वाटल्यास पालक किंवा शिक्षकांची मदत घ्या."]
+                    }
+                }
+            },
+            {
+                id: 11, title: 'उपस्थिती दबाव व कॉलेज नियम चाचणी', icon: '🏫📋', desc: 'उपस्थिती दबाव तपासा  ', color: '#00b894',
+                questions: [
+                    { q: "कॉलेजची उपस्थिती (attendance) पूर्ण करण्याचा मला दबाव वाटतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "उपस्थिती कमी असल्यामुळे मला तणाव जाणवतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कॉलेजचे नियम पाळताना मला मानसिक दडपण येते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "attendance मुळे आजारी असतानाही कॉलेजला यावे लागते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कॉलेजचे नियम कधी कधी कठोर वाटतात.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "उपस्थितीशी संबंधित नोटीस किंवा warning मला अस्वस्थ करते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: " attendance आणि अभ्यास यामध्ये संतुलन राखणे कठीण जाते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कॉलेजच्या नियमांमुळे माझ्या वैयक्तिक वेळेवर परिणाम होतो.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "उपस्थिती कमी असल्यास भविष्यातील परिणामांची चिंता वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 3 },
+                    { q: "कॉलेजचे नियम माझ्या शिकण्यास मदत करतात असे मला वाटते.", o: ["हो", "नाही", "कधीकधी", "कधीच नाही"], a: 0 }
+                ],
+                results: {
+                    0: {
+                        title: "नियमांशी सुसंगत व तणावमुक्त 🌟", score: "76-100%", desc: "तुम्ही कॉलेजची उपस्थिती आणि नियम संतुलितपणे हाताळता आणि त्यामुळे तुम्ही मानसिकदृष्ट्या तणावमुक्त आहात.",
+                        tips: ["तुमचे time management आणि जबाबदारीची भावना अशीच कायम ठेवा.", "नियमांना learning-support system म्हणून पाहत राहा.", "attendance आणि self-study यामध्ये योग्य balance ठेवा."]
+                    },
+                    1: {
+                        title: "बहुतेक वेळा परिस्थिती नियंत्रणात 👍", score: "51-75%", desc: "कधीकधी उपस्थिती किंवा नियमांमुळे ताण जाणवतो, पण तुम्ही तो योग्य प्रकारे manage करत आहात.",
+                        tips: ["attendance planning आधीच करून ठेवा.", "गरज असल्यास शिक्षकांशी मोकळेपणाने संवाद साधा.", "अनावश्यक चिंता टाळून practical approach ठेवा."]
+                    },
+                    2: {
+                        title: "थोडासा दबाव जाणवतो ⚠️", score: "26-50%", desc: "उपस्थिती आणि कॉलेज नियमांमुळे कधी कधी तणाव वाढतो, पण योग्य नियोजनाने तो नक्की कमी होऊ शकतो.",
+                        tips: ["attendance कमी होण्याची कारणे ओळखा आणि त्यावर उपाय करा.", "स्वतःसाठी realistic routine तयार करा.", "तणाव वाढल्यास मार्गदर्शक किंवा class teacher शी बोला."]
+                    },
+                    3: {
+                        title: "दबाव जास्त जाणवत आहे, पण सुधारणा शक्य आहे 🌱", score: "0-25%", desc: "सध्या उपस्थिती आणि नियमांचा ताण जास्त असला तरी योग्य मार्गदर्शन आणि सकारात्मक दृष्टिकोनाने परिस्थिती नक्की सुधारू शकते.",
+                        tips: ["तुम्ही एकटे नाही आहात—मदत मागणे योग्य आहे.", "attendance recovery plan तयार करा.", "स्वतःवर विश्वास ठेवा आणि छोट्या सुधारणा सुरू करा."]
+                    }
+                }
+            }
+
+
+        ];
+
+        // 1. LOGIN HANDLING  
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const studentData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                college: document.getElementById('college').value,
+                std: document.getElementById('std').value
+            };
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(studentData)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    currentStudent = data.student;
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.querySelector('.main-content').style.display = 'block';
+                    document.getElementById('logoutBtn').style.display = 'block';
+                    document.getElementById('studentInfo').innerHTML =
+                        `स्वागत आहे, ${currentStudent.name}! (${currentStudent.college}, ${currentStudent.std})`;
+
+                    createParticles();
+                    renderTests(); // ← Tests 
+                } else {
+                    alert('एरर: ' + data.message);
+                }
+            } catch (error) {
+                alert('कनेक्शन एरर! लॉकल सर्व्हर चालू आहे का तपासा.');
+            }
+        });
+
+        // 2. SAVE TEST RESULT TO DATABASE  
+        async function saveTestResult(testName, score, percentage, level, resultTitle, suggestions) {
+            if (!currentStudent) return;
+
+            await fetch('/api/save-result', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(studentData)
+                body: JSON.stringify({
+                    student_id: currentStudent.id,
+                    test_name: testName,
+                    score: score,
+                    percentage: percentage,
+                    level: level,
+                    result_title: resultTitle,
+                    suggestions: JSON.stringify(suggestions)
+                })
             });
-            
-            const data = await response.json();
-            if(data.success) {
-                currentStudent = data.student;
-                document.getElementById('loginContainer').style.display = 'none';
-                document.querySelector('.main-content').style.display = 'block';
-                document.getElementById('logoutBtn').style.display = 'block';
-                document.getElementById('studentInfo').innerHTML = 
-                    `स्वागत आहे, ${currentStudent.name}! (${currentStudent.college}, ${currentStudent.std})`;
-                
-                createParticles();
-                renderTests(); // ← Tests 
-            } else {
-                alert('एरर: ' + data.message);
+        }
+
+        // 3. PARTICLES ANIMATION
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = (Math.random() * 10 + 5) + 'px';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                particles.appendChild(particle);
             }
-        } catch(error) {
-            alert('कनेक्शन एरर! लॉकल सर्व्हर चालू आहे का तपासा.');
         }
-    });
 
-    // 2. SAVE TEST RESULT TO DATABASE  
-    async function saveTestResult(testName, score, percentage, level, resultTitle, suggestions) {
-        if(!currentStudent) return;
-        
-        await fetch('/api/save-result', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                student_id: currentStudent.id,
-                test_name: testName,
-                score: score,
-                percentage: percentage,
-                level: level,
-                result_title: resultTitle,
-                suggestions: JSON.stringify(suggestions)
-            })
-        });
-    }
-
-    // 3. PARTICLES ANIMATION
-    function createParticles() {
-        const particles = document.getElementById('particles');
-        for(let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.width = particle.style.height = (Math.random() * 10 + 5) + 'px';
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            particles.appendChild(particle);
-        }
-    }
-
-    // 4. RENDER TESTS
-    function renderTests() {
-        document.getElementById('testSelection').innerHTML = tests.map(test => `
+        // 4. RENDER TESTS
+        function renderTests() {
+            document.getElementById('testSelection').innerHTML = tests.map(test => `
             <div class="test-card" onclick="selectTest(${test.id})">
                 <div class="test-icon">${test.icon}</div>
                 <div class="test-title">${test.title}</div>
@@ -555,180 +953,146 @@ results: {
                 </div>
             </div>
         `).join('');
-    }
-
-    // 5. SELECT TEST
-    function selectTest(id) {
-        currentTest = tests[id];
-        document.querySelectorAll('.test-card').forEach((card, index) => {
-            card.classList.toggle('selected', index === id);
-        });
-        document.getElementById('startBtn').disabled = false;
-        document.getElementById('startBtnText').textContent = `चाचणी सुरू करा: ${currentTest.title}`;
-        document.getElementById('testTitleHeader').textContent = currentTest.title;
-    }
-
-    // 6. START QUIZ
-    document.getElementById('startBtn').onclick = startQuiz;
-    function startQuiz() {
-        document.getElementById('testSelection').style.display = 'none';
-        document.getElementById('startBtn').style.display = 'none';
-        document.getElementById('quizContainer').style.display = 'block';
-        
-        answers = new Array(10).fill(-1);
-        currentQuestion = 0;
-        renderQuestion();
-    }
-
-    // 7. RENDER QUESTION
-    function renderQuestion() {
-        if (!currentTest || !currentTest.questions) {
-            alert('या चाचणीसाठी प्रश्न उपलब्ध नाहीत. पहिल्या ३ चाचण्या वापरा.');
-            backToSelection();
-            return;
         }
 
-        const qData = currentTest.questions[currentQuestion];
-        document.getElementById('questionNum').textContent = `प्रश्न ${currentQuestion + 1}/१०`;
-        document.getElementById('question').textContent = qData.q;
-        
-        const options = document.getElementById('options');
-        options.innerHTML = qData.o.map((option, index) => `
+        // 5. SELECT TEST
+        function selectTest(id) {
+            currentTest = tests[id];
+            document.querySelectorAll('.test-card').forEach((card, index) => {
+                card.classList.toggle('selected', index === id);
+            });
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('startBtnText').textContent = `चाचणी सुरू करा: ${currentTest.title}`;
+            document.getElementById('testTitleHeader').textContent = currentTest.title;
+        }
+
+        // 6. START QUIZ
+        document.getElementById('startBtn').onclick = startQuiz;
+        function startQuiz() {
+            document.getElementById('testSelection').style.display = 'none';
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+
+            answers = new Array(10).fill(-1);
+            currentQuestion = 0;
+            renderQuestion();
+        }
+
+        // 7. RENDER QUESTION
+        function renderQuestion() {
+            if (!currentTest || !currentTest.questions) {
+                alert('या चाचणीसाठी प्रश्न उपलब्ध नाहीत. पहिल्या ३ चाचण्या वापरा.');
+                backToSelection();
+                return;
+            }
+
+            const qData = currentTest.questions[currentQuestion];
+            document.getElementById('questionNum').textContent = `प्रश्न ${currentQuestion + 1}/१०`;
+            document.getElementById('question').textContent = qData.q;
+
+            const options = document.getElementById('options');
+            options.innerHTML = qData.o.map((option, index) => `
             <div class="option ${answers[currentQuestion] === index ? 'selected' : ''}" 
                  onclick="selectOption(${index})">${option}</div>
         `).join('');
 
-        document.getElementById('prevBtn').disabled = currentQuestion === 0;
-        document.getElementById('nextBtn').innerHTML = currentQuestion === 9 ? 
-            '<i class="fas fa-check"></i> समाप्त करा' : '<i class="fas fa-arrow-right"></i> पुढे';
-        
-        updateProgress();
-    }
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').innerHTML = currentQuestion === 9 ?
+                '<i class="fas fa-check"></i> समाप्त करा' : '<i class="fas fa-arrow-right"></i> पुढे';
 
-    // 8. SELECT OPTION
-    function selectOption(index) {
-        answers[currentQuestion] = index;
-        renderQuestion();
-    }
+            updateProgress();
+        }
 
-    // 9. NAVIGATION BUTTONS
-    document.getElementById('prevBtn').onclick = () => {
-        if (currentQuestion > 0) {
-            currentQuestion--;
+        // 8. SELECT OPTION
+        function selectOption(index) {
+            answers[currentQuestion] = index;
             renderQuestion();
         }
-    };
 
-    document.getElementById('nextBtn').onclick = () => {
-        if (currentQuestion < 9) {
-            currentQuestion++;
-        } else {
-            showResults();
+        // 9. NAVIGATION BUTTONS
+        document.getElementById('prevBtn').onclick = () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        };
+
+        document.getElementById('nextBtn').onclick = () => {
+            if (currentQuestion < 9) {
+                currentQuestion++;
+            } else {
+                showResults();
+            }
+            renderQuestion();
+        };
+
+        // 10. UPDATE PROGRESS
+        function updateProgress() {
+            const answered = answers.filter(a => a !== -1).length;
+            document.getElementById('progress').style.width = (answered / 10 * 100) + '%';
         }
-        renderQuestion();
-    };
 
-    // 10. UPDATE PROGRESS
-    function updateProgress() {
-        const answered = answers.filter(a => a !== -1).length;
-        document.getElementById('progress').style.width = (answered / 10 * 100) + '%';
-    }
+        // 11. SHOW RESULTS (तुझा saveTestResult + नवा UI)
+        function showResults() {
+            const score = answers.reduce((total, ans, i) => total + (ans === currentTest.questions[i].a ? 1 : 0), 0);
+            const percentage = Math.round(score / 10 * 100);
+            const level = percentage >= 90 ? 0 : percentage >= 70 ? 1 : percentage >= 50 ? 2 : 3;
+            const result = currentTest.results[level];
 
-    // 11. SHOW RESULTS (तुझा saveTestResult + नवा UI)
-    function showResults() {
-        const score = answers.reduce((total, ans, i) => total + (ans === currentTest.questions[i].a ? 1 : 0), 0);
-        const percentage = Math.round(score / 10 * 100);
-        const level = percentage >= 90 ? 0 : percentage >= 70 ? 1 : percentage >= 50 ? 2 : 3;
-        const result = currentTest.results[level];
-        
-        // SAVE TO DATABASE (तुझा original code)
-        saveTestResult(currentTest.title, score, percentage, level, result.title, result.tips);
-        
-        // SHOW RESULTS
-        document.getElementById('quizContainer').style.display = 'none';
-        document.getElementById('results').style.display = 'block';
-        document.getElementById('resultTitle').textContent = result.title;
-        document.getElementById('resultScore').textContent = percentage + '%';
-        document.getElementById('resultDesc').textContent = result.desc;
-        document.getElementById('tipsGrid').innerHTML = result.tips.map(tip => `
+            // SAVE TO DATABASE (तुझा original code)
+            saveTestResult(currentTest.title, score, percentage, level, result.title, result.tips);
+
+            // SHOW RESULTS
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('resultTitle').textContent = result.title;
+            document.getElementById('resultScore').textContent = percentage + '%';
+            document.getElementById('resultDesc').textContent = result.desc;
+            document.getElementById('tipsGrid').innerHTML = result.tips.map(tip => `
             <div class="tip-card">
                 <i class="fas fa-lightbulb" style="font-size:2rem;color:#4ecdc4;margin-bottom:15px;"></i>
                 <div>${tip}</div>
             </div>
         `).join('');
-    }
-
-    // 12. BACK TO SELECTION
-    function backToSelection() {
-        document.getElementById('results').style.display = 'none';
-        document.getElementById('quizContainer').style.display = 'none';
-        document.getElementById('testSelection').style.display = 'grid';
-        document.getElementById('startBtn').style.display = 'block';
-        
-        currentTest = null;
-        currentQuestion = 0;
-        answers = [];
-        
-        document.querySelectorAll('.test-card').forEach(card => card.classList.remove('selected'));
-        document.getElementById('startBtn').disabled = true;
-        document.getElementById('startBtnText').textContent = 'चाचणी सुरू करा';
-    }
-
-    // 13. LOGOUT (तुझा original)
-    function logout() {
-        currentStudent = null;
-        document.getElementById('loginContainer').style.display = 'flex';
-        document.querySelector('.main-content').style.display = 'none';
-        document.getElementById('logoutBtn').style.display = 'none';
-        document.getElementById('loginForm').reset();
-        
-        // Reset test UI
-        backToSelection();
-        document.getElementById('particles').innerHTML = '';
-    }
-
-    // 14. KEYBOARD SHORTCUTS
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && document.getElementById('quizContainer').style.display !== 'none') {
-            document.getElementById('nextBtn').click();
         }
-    } 
-    );
-</script>
+
+        // 12. BACK TO SELECTION
+        function backToSelection() {
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('testSelection').style.display = 'grid';
+            document.getElementById('startBtn').style.display = 'block';
+
+            currentTest = null;
+            currentQuestion = 0;
+            answers = [];
+
+            document.querySelectorAll('.test-card').forEach(card => card.classList.remove('selected'));
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('startBtnText').textContent = 'चाचणी सुरू करा';
+        }
+
+        // 13. LOGOUT (तुझा original)
+        function logout() {
+            currentStudent = null;
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.querySelector('.main-content').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.getElementById('loginForm').reset();
+
+            // Reset test UI
+            backToSelection();
+            document.getElementById('particles').innerHTML = '';
+        }
+
+        // 14. KEYBOARD SHORTCUTS
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && document.getElementById('quizContainer').style.display !== 'none') {
+                document.getElementById('nextBtn').click();
+            }
+        }
+        );
+    </script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
